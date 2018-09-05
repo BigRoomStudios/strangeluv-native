@@ -1,14 +1,14 @@
 module.exports = {
 
     // Text //
-    primaryTextColor: 'black',
+    primaryTextColor: '#DAF7DC',
 
     // Backgrounds //
-    primaryBgColor: '#e9e9ef',
+    primaryBgColor: '#1D3D57',
 
     // Colors //
-    primaryColor: 'green',
-    secondaryColor: '#019dd0',
+    primaryColor: '#6A8D92',
+    secondaryColor: '#DAF7DC',
 
     // Icons //
     iconSize: 30

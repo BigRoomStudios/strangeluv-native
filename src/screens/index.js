@@ -1,4 +1,4 @@
-const Counter = require('./counter');
+const Login = require('./login');
 const Home = require('./home');
 
 // This is our main route config,
@@ -11,7 +11,7 @@ module.exports = (store) => {
     return {
         routeConfig: {
             Home,
-            Counter
+            Login
         },
         initialRouteName: 'Home'
     };

@@ -7,9 +7,18 @@ const StyledText = styled.Text`
 
 module.exports = {
 
-    ScrollView: styled.ScrollView`
+    ScrollView: styled.ScrollView.attrs({
+        contentContainerStyle: {
+            paddingHorizontal: 20,
+            paddingBottom: 20,
+            flex: 1,
+            flexDirection: 'column',
+            justifyContent: 'center',
+            alignItems: 'center'
+        }
+    })`
         background-color: ${Theme.primaryBgColor};
-        padding: 128px;
+        padding: 16px;
     `,
     Text: StyledText,
     Title: styled(StyledText)`

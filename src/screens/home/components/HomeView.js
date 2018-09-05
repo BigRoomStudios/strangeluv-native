@@ -8,8 +8,6 @@ const LStyles = require('./styles'); // local styles
 const { ScrollView, Title } = GStyles;
 const { Duck, InheritStylesText } = LStyles;
 
-// Component
-
 module.exports = class HomeView extends React.PureComponent {
 
     static propTypes = {
@@ -37,26 +35,14 @@ module.exports = class HomeView extends React.PureComponent {
 
         return (
             <ScrollView>
-                <InheritStylesText
-                    color='#b71c1c' // Material Red900
-                    onPress={this.navigate(navigation, 'Home')}>
-
+                <InheritStylesText color='#b71c1c' onPress={this.navigate(navigation, 'Home')}>
                     Home
-
                 </InheritStylesText>
-
-                <InheritStylesText
-                    onPress={this.navigate(navigation, 'Counter')}>
-
-                    Counter
-
+                <InheritStylesText onPress={this.navigate(navigation, 'Login')}>
+                    Login
                 </InheritStylesText>
-
-                <Title> Welcome! </Title>
-
-                <Duck
-                    source={require('../assets/duck.jpg')}
-                />
+                <Title>Welcome!</Title>
+                <Duck source={require('../assets/duck.png')} />
             </ScrollView>
         );
     }
