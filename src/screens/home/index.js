@@ -1,6 +1,6 @@
 module.exports = {
 
-    screen: require('./components/HomeView'),
+    screen: require('./containers/Home'),
     path: 'home',
     navigationOptions: {
         title: 'Welcome'

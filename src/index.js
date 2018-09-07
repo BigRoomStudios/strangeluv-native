@@ -5,7 +5,8 @@ const AppRegistry = ReactNative.AppRegistry;
 const AppContainer = require('containers/App');
 const CreateReactClass = require('create-react-class');
 const CreateStore = require('wiring/create-store');
-const NavigationService = require('./navigators/navigation-service');
+const Initializers = require('initializers');
+const NavigationService = require('navigators/navigation-service');
 
 require('../globals');
 
@@ -24,6 +25,8 @@ if (__DEV__) {
 
 // TODO: Empty object until we get persistant storage hooked up
 const store = CreateStore({});
+
+Initializers.run(store);
 
 module.exports = () => {
 

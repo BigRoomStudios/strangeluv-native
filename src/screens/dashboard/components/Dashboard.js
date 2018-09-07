@@ -36,9 +36,6 @@ module.exports = class HomeView extends React.PureComponent {
                 <Text color='#b71c1c' onPress={this.navigate(navigation, 'Home')}>
                     Home
                 </Text>
-                <Text onPress={this.navigate(navigation, 'Login')}>
-                    Login
-                </Text>
                 <Title>Very cool dashboard!</Title>
             </ScrollView>
         );

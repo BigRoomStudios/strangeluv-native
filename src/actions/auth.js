@@ -53,15 +53,14 @@ exports.registerUser = ({ email, password, firstName, lastName }) => {
 };
 
 // Login and Logout
-exports.login = (email, password, token) => {
+exports.login = ({ email, password, token }) => {
 
     return (dispatch) => {
 
         const strangeLogin = internals.strangeActions.login({ email, password, token });
 
         return dispatch(strangeLogin)
-
-        .then(() => {
+        .then((result) => {
 
             NavigationService.navigate('Dashboard');
         })
@@ -98,13 +97,11 @@ internals.strangeActions = StrangeAuth.makeActions({
         let finalToken;
 
         return getToken()
-
         .then((result) => {
 
             finalToken = result;
             return internals.getUser(finalToken);
         })
-
         .then(({ data }) => {
 
             return {

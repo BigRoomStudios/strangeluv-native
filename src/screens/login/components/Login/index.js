@@ -37,9 +37,7 @@ module.exports = class Login extends React.PureComponent {
 
         const { email, password } = this.state;
 
-        // console.warn(email + ' ' + password);
-
-        this.props.login(email, password);
+        this.props.login({ email, password });
     }
 
     render() {
