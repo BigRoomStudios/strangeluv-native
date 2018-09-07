@@ -3,10 +3,8 @@ const T = require('prop-types');
 
 // Styles
 const GStyles = require('styles'); // global styles
-const LStyles = require('./styles'); // local styles
 
-const { ScrollView, Title } = GStyles;
-const { Duck, InheritStylesText } = LStyles;
+const { ScrollView, Title, Text } = GStyles;
 
 module.exports = class HomeView extends React.PureComponent {
 
@@ -35,17 +33,13 @@ module.exports = class HomeView extends React.PureComponent {
 
         return (
             <ScrollView>
-                <InheritStylesText color='#b71c1c' onPress={this.navigate(navigation, 'Home')}>
+                <Text color='#b71c1c' onPress={this.navigate(navigation, 'Home')}>
                     Home
-                </InheritStylesText>
-                <InheritStylesText onPress={this.navigate(navigation, 'Login')}>
+                </Text>
+                <Text onPress={this.navigate(navigation, 'Login')}>
                     Login
-                </InheritStylesText>
-                <InheritStylesText onPress={this.navigate(navigation, 'Dashboard')}>
-                    Dashboard
-                </InheritStylesText>
-                <Title>Welcome!</Title>
-                <Duck source={require('../assets/duck.png')} />
+                </Text>
+                <Title>Very cool dashboard!</Title>
             </ScrollView>
         );
     }

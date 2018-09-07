@@ -1,25 +1,125 @@
-const AuthTypes = require('action-types/auth');
-const { api } = require('../middleware/api');
-const { AsyncStorage } = require('react-native');
+const StrangeAuth = require('strange-auth');
+const WebClient = require('utils/web-client');
+const AuthAct = require('action-types/auth');
+const NavigationService = require('navigators/navigation-service');
 
+const internals = {};
 
-exports.authenticateUser = (args) => {
+const actions = exports;
+
+// New User Registration
+exports.registrationRequest = (payload) => ({
+    type: AuthAct.REGISTRATION_BEGIN,
+    payload
+});
+
+exports.registrationSuccess = (data) => ({
+    type: AuthAct.REGISTRATION_SUCCESS,
+    payload: data
+});
+
+exports.registrationFailure = (errMessage) => ({
+    type: AuthAct.REGISTRATION_FAILURE,
+    payload: errMessage
+});
+
+exports.registerUser = ({ email, password, firstName, lastName }) => {
 
     return (dispatch) => {
 
-        dispatch({ type: AuthTypes.LOGIN_INITIATED });
+        dispatch(actions.registrationRequest({ email, password, firstName, lastName }));
 
-        api('login', 'post', args).then((response) => {
+        const newUser = WebClient.post('/users', { email, password, firstName, lastName });
 
-            if (response.status !== 200) {
-                return dispatch({ type: AuthTypes.LOGIN_ERROR, err: response });
+        newUser
+        .then(({ response }) => {
+
+            dispatch(actions.registrationSuccess(response));
+            dispatch(actions.login({ email, password }));
+        })
+        .catch((err) => {
+
+            let errMessage = 'Signup failed. Please try again.';
+
+            if (typeof err.response !== 'undefined') {
+                errMessage = err.response.data.message;
             }
 
-            AsyncStorage.setItem('auth_token', response._bodyText).then(() => {
+            dispatch(actions.registrationFailure(errMessage));
+        });
 
-                dispatch({ type: AuthTypes.LOGGED_IN });
-            });
-
-        }).catch((err) => dispatch({ type: AuthTypes.LOGIN_ERROR, err }));
+        return newUser;
     };
+};
+
+// Login and Logout
+exports.login = (email, password, token) => {
+
+    return (dispatch) => {
+
+        const strangeLogin = internals.strangeActions.login({ email, password, token });
+
+        return dispatch(strangeLogin)
+
+        .then(() => {
+
+            NavigationService.navigate('Dashboard');
+        })
+        .catch((err) => {
+
+            console.warn(err.response.data.message);
+        });
+    };
+};
+
+exports.logout = () => {
+
+    return (dispatch) => {
+
+        dispatch(internals.strangeActions.logout());
+        NavigationService.navigate('Home');
+    };
+};
+
+// StrangeAuth
+internals.strangeActions = StrangeAuth.makeActions({
+    login: ({ email, password, token }) => {
+
+        const getToken = () => {
+
+            if (token) {
+                return Promise.resolve(token);
+            }
+
+            return WebClient.post('/login', { email, password }, { responseType: 'text' })
+            .then(({ data }) => data);
+        };
+
+        let finalToken;
+
+        return getToken()
+
+        .then((result) => {
+
+            finalToken = result;
+            return internals.getUser(finalToken);
+        })
+
+        .then(({ data }) => {
+
+            return {
+                credentials: {
+                    token: finalToken,
+                    user: data
+                }
+            };
+        });
+    }
+});
+
+internals.getUser = (token) => {
+
+    return WebClient.get('/user', {
+        headers: { authorization: `Bearer ${token}` }
+    });
 };

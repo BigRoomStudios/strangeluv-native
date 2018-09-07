@@ -1,32 +1,23 @@
-const AuthTypes = require('action-types/auth');
+const StrangeAuth = require('strange-auth');
+const Deeply = require('utils/deeply');
 
-const internals = {
-    initial: {
-        init: false,
-        error: false,
-        text: '',
-        isLoggedIn: false
-    }
-};
+const authReducer = StrangeAuth.makeReducer();
 
 module.exports = (state, action) => {
 
-    state = state || internals.initial;
+    state = authReducer(state, action);
 
-    switch (action.type) {
-        case AuthTypes.LOGIN_INITIATED:
-            return { ...state, init: true, error: false };
-        case AuthTypes.LOGIN_ERROR:
-            return { ...state, init: false, error: true, text: action.text };
-        case AuthTypes.LOGGED_IN:
-            return { ...state, isLoggedIn: true, init: false, error: false };
-        case AuthTypes.LOGGED_OUT:
-            return { ...state, isLoggedIn: false };
-        case AuthTypes.LOGIN_CLEAR_ERRORS:
-            return {  ...state, init: false, error: false, text: '' };
-        case AuthTypes.LOGIN_RESET:
-            return internals.initialState;
-        default:
-            return state;
+    const { type } = action;
+
+    switch (type) {
+
+        // Example of modifying a strange-auth action-type
+        case StrangeAuth.types.LOGIN_FAIL:
+
+            return Deeply(state)
+            .set('error.message', 'Login failed, please check your email and password.')
+            .value();
     }
+
+    return state;
 };

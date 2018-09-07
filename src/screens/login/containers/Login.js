@@ -6,11 +6,9 @@ const internals = {};
 
 // What state and actions do we want to hook-up?
 internals.connect = Connect(
-    (state) => ({
-        formData: state.formData
-    }),
+    null,
     {
-        login: (args) => AuthAct.login
+        login: AuthAct.login
     }
 );
 

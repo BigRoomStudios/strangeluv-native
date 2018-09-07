@@ -5,6 +5,7 @@ const AppRegistry = ReactNative.AppRegistry;
 const AppContainer = require('containers/App');
 const CreateReactClass = require('create-react-class');
 const CreateStore = require('wiring/create-store');
+const NavigationService = require('./navigators/navigation-service');
 
 require('../globals');
 
@@ -34,7 +35,12 @@ module.exports = () => {
 
             return (
                 <AppContainer store={store}>
-                    <RootNavigator />
+                    <RootNavigator
+                        ref={(navigatorRef) => {
+
+                            NavigationService.setTopLevelNavigator(navigatorRef);
+                        }}
+                    />
                 </AppContainer>
             );
         }

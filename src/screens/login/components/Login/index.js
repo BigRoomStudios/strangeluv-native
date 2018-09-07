@@ -13,7 +13,7 @@ const DefaultButton = require('components/DefaultButton');
 module.exports = class Login extends React.PureComponent {
 
     static propTypes = {
-        userAuth: T.func
+        login: T.func
     };
 
     constructor() {
@@ -24,11 +24,22 @@ module.exports = class Login extends React.PureComponent {
             email: '',
             password: ''
         };
+
+        this.submit = this._submit.bind(this);
     }
 
     inputsAreValid() {
 
-        return (this.state.email !== '' && this.state.password !== '');
+        return this.state.email !== '' && this.state.password !== '';
+    }
+
+    _submit() {
+
+        const { email, password } = this.state;
+
+        // console.warn(email + ' ' + password);
+
+        this.props.login(email, password);
     }
 
     render() {
@@ -59,7 +70,7 @@ module.exports = class Login extends React.PureComponent {
                 />
                 {this.inputsAreValid() &&
                     <DefaultButton
-                        onPress={this.props.userAuth}
+                        onPress={this.submit}
                         text='LOGIN'
                         icon='sign-in'
                     />
