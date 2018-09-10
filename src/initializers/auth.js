@@ -13,7 +13,9 @@ module.exports = (store) => {
             console.warn('set token error ' + JSON.stringify(err));
         }
 
-        store.dispatch(AuthActions.login({ token }));
+        if (token) {
+            store.dispatch(AuthActions.login({ token }));
+        }
     });
 
     store.subscribe(() => {

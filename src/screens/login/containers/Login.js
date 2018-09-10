@@ -6,7 +6,9 @@ const internals = {};
 
 // What state and actions do we want to hook-up?
 internals.connect = Connect(
-    null,
+    (state) => ({
+        authError: state.auth.error.message
+    }),
     {
         login: AuthAct.login
     }

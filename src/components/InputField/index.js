@@ -6,7 +6,7 @@ const Theme = require('styles/theme');
 
 const Icon = require('react-native-vector-icons/FontAwesome').default;
 
-const { InputContainer, InputIconContainer, StyledInput } = LStyles;
+const { InputContainer, InputIconContainer, StyledInput, ErrorInput } = LStyles;
 
 module.exports = class InputField extends React.PureComponent {
 
@@ -14,7 +14,7 @@ module.exports = class InputField extends React.PureComponent {
         placeholder: T.string.isRequired,
         value: T.string.isRequired,
         iconName: T.string.isRequired,
-        hasError: T.bool.isRequired,
+        hasError: T.bool,
         iconSize: T.number,
         onChangeText: T.func,
         keyboardType: T.string,
@@ -23,15 +23,17 @@ module.exports = class InputField extends React.PureComponent {
 
     render() {
 
-        const { iconSize } = this.props;
+        const { iconSize, iconName, hasError } = this.props;
+
+        const InputComponent = hasError ? ErrorInput : StyledInput;
 
         return (
 
             <InputContainer>
                 <InputIconContainer>
-                    <Icon name={this.props.iconName} size={iconSize ? iconSize : 22} color={Theme.secondaryColor} />
+                    <Icon name={iconName} size={iconSize ? iconSize : 22} color={hasError ? 'red' : Theme.secondaryColor} />
                 </InputIconContainer>
-                <StyledInput
+                <InputComponent
                     placeholderTextColor={Theme.primaryColor}
                     autoCapitalize='none'
                     underlineColorAndroid='transparent'
