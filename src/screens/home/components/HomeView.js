@@ -24,9 +24,12 @@ module.exports = class HomeView extends React.PureComponent {
                 <InheritStylesText color='#b71c1c' onPress={() => navigation.navigate('Home')}>
                     Home
                 </InheritStylesText>
-                {!isAuthenticated && <InheritStylesText onPress={() => navigation.navigate('Login')}>
-                    Login
-                </InheritStylesText>}
+                {!isAuthenticated &&
+                    <InheritStylesText onPress={() => navigation.navigate('Login')}>Login</InheritStylesText>
+                }
+                {!isAuthenticated &&
+                    <InheritStylesText onPress={() => navigation.navigate('Signup')}>Signup</InheritStylesText>
+                }
                 {isAuthenticated && <InheritStylesText onPress={() => navigation.navigate('Dashboard')}>
                     Dashboard
                 </InheritStylesText>}

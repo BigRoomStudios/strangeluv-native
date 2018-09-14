@@ -33,5 +33,9 @@ module.exports = {
     Button: styled.Button`
         border: 1px solid blue;
         padding: 100px;
+    `,
+    ErrorText: styled.Text`
+        color: red;
+        padding-bottom: 12px;
     `
 };
