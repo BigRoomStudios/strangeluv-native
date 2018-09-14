@@ -1,7 +1,7 @@
 module.exports = {
 
     screen: require('./containers/Signup'),
-    path: 'Signup',
+    path: 'signup',
     navigationOptions: {
         title: 'Signup'
     }

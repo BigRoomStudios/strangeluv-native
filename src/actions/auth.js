@@ -39,13 +39,8 @@ exports.registerUser = ({ email, password, firstName, lastName }) => {
         })
         .catch((err) => {
 
-            let errMessage = 'Signup failed. Please try again.';
 
-            if (typeof err.response !== 'undefined') {
-                errMessage = err.response.data.message;
-            }
-
-            dispatch(actions.registrationFailure(errMessage));
+            console.warn(err.response.data.message);
         });
 
         return newUser;

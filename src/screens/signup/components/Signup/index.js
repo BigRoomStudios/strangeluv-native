@@ -26,7 +26,8 @@ module.exports = class Signup extends StrangeForms(React.Component) {
         super(props, context);
 
         this.state = {
-            name: '',
+            firstName: '',
+            lastName: '',
             email: '',
             password: '',
             hasEmailBlurred: false
@@ -37,7 +38,7 @@ module.exports = class Signup extends StrangeForms(React.Component) {
         this.emailFieldBlurred = this._emailFieldBlurred.bind(this);
 
         this.strangeForm({
-            fields: ['name', 'email', 'password'],
+            fields: ['firstName', 'lastName', 'email', 'password'],
             get: (someProps, field) => this.state[field],
             act: (field, value) => this.setState({ [field]: value }),
             getFormValue: this.getFormValue
@@ -46,7 +47,7 @@ module.exports = class Signup extends StrangeForms(React.Component) {
 
     inputsAreValid() {
 
-        return this.state.email !== '' && this.state.password !== '';
+        return this.state.email !== '' && this.state.password !== '' && this.state.firstName !== '' && this.state.lastName !== '';
     }
 
     _getFormValue(value) {
@@ -56,9 +57,9 @@ module.exports = class Signup extends StrangeForms(React.Component) {
 
     _submit() {
 
-        const { email, password } = this.state;
+        const { email, password, firstName, lastName } = this.state;
 
-        this.props.login({ email, password });
+        this.props.signup({ email, password, firstName, lastName });
     }
 
     _emailFieldBlurred() {
@@ -74,16 +75,24 @@ module.exports = class Signup extends StrangeForms(React.Component) {
     render() {
 
         return (
+
             <StyledScrollView>
                 <TitleContainer>
                     <Title>User Signup</Title>
                     <StylishText>Signup with Strangeluv Native</StylishText>
                 </TitleContainer>
                 <InputField
-                    onChangeText={this.proposeNew('name')}
-                    onBlur={this.emailFieldBlurred}
-                    value={this.fieldValue('name')}
-                    placeholder='Name'
+                    onChangeText={this.proposeNew('firstName')}
+                    value={this.fieldValue('firstName')}
+                    placeholder='First Name'
+                    iconName='user'
+                    autoCorrect={false}
+                    iconSize={18}
+                />
+                <InputField
+                    onChangeText={this.proposeNew('lastName')}
+                    value={this.fieldValue('lastName')}
+                    placeholder='Last Name'
                     iconName='user'
                     autoCorrect={false}
                     iconSize={18}
@@ -116,7 +125,7 @@ module.exports = class Signup extends StrangeForms(React.Component) {
                     <DefaultButton
                         onPress={this.submit}
                         text='SIGNUP'
-                        icon='sign-up'
+                        icon='user'
                     />
                 }
             </StyledScrollView>
