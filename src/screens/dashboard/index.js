@@ -1,6 +1,6 @@
 module.exports = {
 
-    screen: require('./components/Dashboard'),
+    screen: require('./containers/Dashboard'),
     path: 'dashboard',
     navigationOptions: {
         title: 'Dashboard'

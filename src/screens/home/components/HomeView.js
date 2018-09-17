@@ -12,12 +12,13 @@ module.exports = class HomeView extends React.PureComponent {
 
     static propTypes = {
         navigation: T.object.isRequired,
-        isAuthenticated: T.bool.isRequired
+        isAuthenticated: T.bool.isRequired,
+        logout: T.func.isRequired
     };
 
     render() {
 
-        const { navigation, isAuthenticated } = this.props;
+        const { navigation, isAuthenticated, logout } = this.props;
 
         return (
             <ScrollView>
@@ -32,6 +33,9 @@ module.exports = class HomeView extends React.PureComponent {
                 }
                 {isAuthenticated && <InheritStylesText onPress={() => navigation.navigate('Dashboard')}>
                     Dashboard
+                </InheritStylesText>}
+                {isAuthenticated && <InheritStylesText onPress={logout}>
+                    Logout
                 </InheritStylesText>}
                 <Title>Welcome!</Title>
                 <Duck source={require('../assets/duck.png')} />

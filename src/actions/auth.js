@@ -28,7 +28,6 @@ exports.loginFailure = (errMessage) => ({
     payload: errMessage
 });
 
-
 exports.registerUser = ({ email, password, firstName, lastName }) => {
 
     return (dispatch) => {
