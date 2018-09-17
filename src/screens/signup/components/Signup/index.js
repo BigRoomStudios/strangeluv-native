@@ -18,7 +18,7 @@ module.exports = class Signup extends StrangeForms(React.Component) {
     static propTypes = {
         signup: T.func.isRequired,
         errorMessage: T.string,
-        authError: T.object
+        authError: T.string
     };
 
     constructor(props, context) {
@@ -121,7 +121,7 @@ module.exports = class Signup extends StrangeForms(React.Component) {
                 {this.props.authError &&
                     <ErrorText>{this.props.authError}</ErrorText>
                 }
-                {this.inputsAreValid() &&
+                {(this.inputsAreValid() && IsEmail(this.state.email)) &&
                     <DefaultButton
                         onPress={this.submit}
                         text='SIGNUP'

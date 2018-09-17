@@ -18,7 +18,7 @@ module.exports = class Login extends StrangeForms(React.Component) {
     static propTypes = {
         login: T.func.isRequired,
         errorMessage: T.string,
-        authError: T.object
+        authError: T.string
     };
 
     constructor(props, context) {

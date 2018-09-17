@@ -5,5 +5,6 @@ module.exports = KeyMirror({
     REGISTRATION_SUCCESS: true,
     REGISTRATION_FAILURE: true,
     LOGIN: true,
-    LOGOUT: true
+    LOGOUT: true,
+    LOGIN_FAIL: true
 });
