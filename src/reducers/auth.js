@@ -24,6 +24,12 @@ module.exports = (state, action) => {
             return Deeply(state)
             .set('error.message', payload)
             .value();
+
+        case AuthTypes.CLEAR_AUTH_ERRORS:
+
+            return Deeply(state)
+            .set('error.message', null)
+            .value();
     }
 
     return state;

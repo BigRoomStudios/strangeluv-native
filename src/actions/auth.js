@@ -28,6 +28,10 @@ exports.loginFailure = (errMessage) => ({
     payload: errMessage
 });
 
+exports.clearErrors = () => ({
+    type: AuthAct.CLEAR_AUTH_ERRORS
+});
+
 exports.registerUser = ({ email, password, firstName, lastName }) => {
 
     return (dispatch) => {

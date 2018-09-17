@@ -18,7 +18,8 @@ module.exports = class Login extends StrangeForms(React.Component) {
     static propTypes = {
         login: T.func.isRequired,
         errorMessage: T.string,
-        authError: T.string
+        authError: T.string,
+        clearErrors: T.func.isRequired
     };
 
     constructor(props, context) {
@@ -41,6 +42,11 @@ module.exports = class Login extends StrangeForms(React.Component) {
             act: (field, value) => this.setState({ [field]: value }),
             getFormValue: this.getFormValue
         });
+    }
+
+    componentDidMount() {
+
+        this.props.clearErrors();
     }
 
     inputsAreValid() {
