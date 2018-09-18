@@ -1,5 +1,7 @@
-const Counter = require('./counter');
+const Login = require('./login');
+const Signup = require('./signup');
 const Home = require('./home');
+const Dashboard = require('./dashboard');
 
 // This is our main route config,
 // to have a single place to collect
@@ -11,7 +13,9 @@ module.exports = (store) => {
     return {
         routeConfig: {
             Home,
-            Counter
+            Signup,
+            Login,
+            Dashboard
         },
         initialRouteName: 'Home'
     };

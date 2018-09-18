@@ -21,7 +21,9 @@
                     "screens": "./src/screens",
                     "wiring": "./src/wiring",
                     "utils": "./src/utils",
-                    "styles": "./src/styles"
+                    "styles": "./src/styles",
+                    "initializers": "./src/initializers",
+                    "navigators": "./src/navigators"
                 }
             }
         ]
