@@ -23,19 +23,15 @@ exports.registrationFailure = (errMessage) => ({
     payload: errMessage
 });
 
-exports.loginFailure = (errMessage) => ({
-    type: AuthAct.LOGIN_FAIL,
-    payload: errMessage
-});
-
-
 exports.registerUser = ({ email, password, firstName, lastName }) => {
 
     return (dispatch) => {
 
         dispatch(actions.registrationRequest({ email, password, firstName, lastName }));
 
-        return WebClient.post('/users', { email, password, firstName, lastName })
+        const newUser = WebClient.post('/users', { email, password, firstName, lastName });
+
+        newUser
         .then(({ response }) => {
 
             dispatch(actions.registrationSuccess(response));
@@ -63,10 +59,6 @@ exports.login = ({ email, password, token }) => {
         .then((result) => {
 
             NavigationService.navigate('Dashboard');
-        })
-        .catch((err) => {
-
-            dispatch(actions.loginFailure(err.response.data.message));
         });
     };
 };
