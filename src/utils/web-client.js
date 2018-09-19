@@ -2,8 +2,8 @@ const Axios = require('axios');
 
 const internals = {
     //Configure this to your environment
-    host: process.env.API_HOST || 'https://staging.getcupie.com',
-    prefix: process.env.API_PREFIX || '/api',
+    host: process.env.API_HOST || '',
+    prefix: process.env.API_PREFIX || '',
     getApiBase: () => {
 
         const { host, prefix } = internals;
