@@ -1,7 +1,7 @@
 const Connect = require('react-redux').connect;
 const AuthSelectors = require('selectors/auth');
 const AuthAct = require('actions/auth');
-const HomeView = require('../components/HomeView');
+const Dashboard = require('../components/Dashboard');
 
 const internals = {};
 
@@ -16,4 +16,4 @@ internals.connect = Connect(
 );
 
 // Hook them up to the login
-module.exports = internals.connect(HomeView);
+module.exports = internals.connect(Dashboard);

@@ -10,7 +10,8 @@ internals.connect = Connect(
         authError: state.auth.error.message
     }),
     {
-        login: AuthAct.login
+        login: AuthAct.login,
+        clearErrors: AuthAct.clearErrors
     }
 );
 

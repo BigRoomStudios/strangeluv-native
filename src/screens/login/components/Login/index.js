@@ -18,7 +18,8 @@ module.exports = class Login extends StrangeForms(React.Component) {
     static propTypes = {
         login: T.func.isRequired,
         errorMessage: T.string,
-        authError: T.string
+        authError: T.string,
+        clearErrors: T.func.isRequired
     };
 
     constructor(props, context) {
@@ -43,9 +44,14 @@ module.exports = class Login extends StrangeForms(React.Component) {
         });
     }
 
+    componentDidMount() {
+
+        this.props.clearErrors();
+    }
+
     inputsAreValid() {
 
-        return this.state.email !== '' && this.state.password !== '';
+        return this.state.email !== '' && this.state.password !== '' && !this.showEmailError();
     }
 
     _getFormValue(value) {
@@ -73,6 +79,7 @@ module.exports = class Login extends StrangeForms(React.Component) {
     render() {
 
         return (
+
             <StyledScrollView>
                 <TitleContainer>
                     <Title>User Login</Title>
