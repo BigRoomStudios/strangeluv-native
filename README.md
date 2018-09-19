@@ -69,9 +69,12 @@ If all goes well you should see something like this,
 |`a`, `android`|Starts the app in an Android simulator|
 
 ## Generate app icons
-- brew install imagemagick... yes.
-- add an square icon.png 512x512 or greater to the root project directory
-- app-icon generate
+- `npm install app-icon -g`
+- `brew install imagemagick`
+- add an square image named icon.png
+   - 512x512px or greater
+   - place into the project directory
+- `app-icon generate`
 
 ## Application Structure
 
