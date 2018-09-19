@@ -7,10 +7,10 @@ const internals = {};
 // What state and actions do we want to hook-up?
 internals.connect = Connect(
     (state) => ({
-        formData: state.formData
+        authError: state.auth.error.message
     }),
     {
-        login: (args) => AuthAct.login
+        login: AuthAct.login
     }
 );
 

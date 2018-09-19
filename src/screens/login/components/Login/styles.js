@@ -8,6 +8,11 @@ module.exports = {
         color: ${Theme.primaryColor};
         padding-top: 8px;
     `,
+    ErrorText: styled(Text)`
+        color: red;
+        padding-top: 4px;
+        padding-bottom: 4px;
+    `,
     StyledScrollView: styled(ScrollView)`
       background-color: ${Theme.primaryBgColor};
     `,
