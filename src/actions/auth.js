@@ -47,8 +47,6 @@ exports.registerUser = ({ email, password, firstName, lastName }) => {
 
             dispatch(actions.registrationFailure(errMessage));
         });
-
-        return newUser;
     };
 };
 
@@ -57,16 +55,10 @@ exports.login = ({ email, password, token }) => {
 
     return (dispatch) => {
 
-        const strangeLogin = internals.strangeActions.login({ email, password, token });
-
-        return dispatch(strangeLogin)
+        return dispatch(internals.strangeActions.login({ email, password, token }))
         .then((result) => {
 
             NavigationService.navigate('Dashboard');
-        })
-        .catch((err) => {
-
-            console.warn(err.response.data.message);
         });
     };
 };
