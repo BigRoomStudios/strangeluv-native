@@ -62,8 +62,9 @@ exports.login = ({ email, password, token }) => {
         return dispatch(internals.strangeActions.login({ email, password, token }))
         .then((result) => {
 
-            NavigationService.navigate('Dashboard');
-        });
+            NavigationService.reset('Dashboard');
+        })
+        .catch((ignoreErr) => {});
     };
 };
 
@@ -72,7 +73,7 @@ exports.logout = () => {
     return (dispatch) => {
 
         dispatch(internals.strangeActions.logout());
-        NavigationService.navigate('Home');
+        NavigationService.reset('Home');
     };
 };
 
