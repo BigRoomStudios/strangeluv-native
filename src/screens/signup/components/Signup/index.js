@@ -52,12 +52,11 @@ module.exports = class Signup extends StrangeForms(React.Component) {
     }
 
     inputsAreValid() {
-
-        return this.state.email !== '' &&
-        this.state.password !== '' &&
-        this.state.firstName !== '' &&
-        this.state.lastName !== '' &&
-        !this.showEmailError();
+      
+        return this.state.password !== ''
+        && this.state.firstName !== ''
+        && this.state.lastName !== ''
+        && IsEmail(this.state.email);
     }
 
     _getFormValue(value) {
@@ -131,7 +130,7 @@ module.exports = class Signup extends StrangeForms(React.Component) {
                 {this.props.authError &&
                     <ErrorText>{this.props.authError}</ErrorText>
                 }
-                {(this.inputsAreValid() && IsEmail(this.state.email)) &&
+                {this.inputsAreValid() &&
                     <DefaultButton
                         onPress={this.submit}
                         text='SIGNUP'
