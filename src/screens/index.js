@@ -1,6 +1,7 @@
 const Login = require('./login');
 const Home = require('./home');
 const Dashboard = require('./dashboard');
+const ForgotPassword = require('./forgot-password');
 
 // This is our main route config,
 // to have a single place to collect
@@ -13,7 +14,8 @@ module.exports = (store) => {
         routeConfig: {
             Home,
             Login,
-            Dashboard
+            Dashboard,
+            ForgotPassword
         },
         initialRouteName: 'Home'
     };

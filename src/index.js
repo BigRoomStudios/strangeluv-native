@@ -50,5 +50,5 @@ module.exports = () => {
     });
 
     // register with the AppRegistery and :rocket: into space!
-    AppRegistry.registerComponent('strangeluvnative', () => AppContainerClass);
+    AppRegistry.registerComponent('mynewprojectname', () => AppContainerClass);
 };

@@ -27,6 +27,9 @@ module.exports = class HomeView extends React.PureComponent {
                 {!isAuthenticated && <InheritStylesText onPress={() => navigation.navigate('Login')}>
                     Login
                 </InheritStylesText>}
+                {!isAuthenticated && <InheritStylesText onPress={() => navigation.navigate('ForgotPassword')}>
+                    Forgot Your Password?
+                </InheritStylesText>}
                 {isAuthenticated && <InheritStylesText onPress={() => navigation.navigate('Dashboard')}>
                     Dashboard
                 </InheritStylesText>}

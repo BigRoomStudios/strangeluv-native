@@ -2,8 +2,8 @@ const Axios = require('axios');
 
 const internals = {
     //Configure this to your environment
-    host: process.env.API_HOST || 'https://qa.mybodymodel.com',
-    prefix: process.env.API_PREFIX || '',
+    host: process.env.API_HOST || 'http://localhost:4000',
+    prefix: process.env.API_PREFIX || '/api',
     getApiBase: () => {
 
         const { host, prefix } = internals;

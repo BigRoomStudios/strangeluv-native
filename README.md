@@ -33,23 +33,30 @@ Here you find a fork of [this](https://github.com/BigRoomStudios/strangeluv) Rea
 
 ## Getting Started
 
-Setup your environment (Get ANDROID_HOME var all set, install xCode if ur on a Mac)
-See this Getting Started guide on Facebook's Github: https://facebook.github.io/react-native/docs/getting-started.html
+First, follow the instructions here: https://facebook.github.io/react-native/docs/getting-started.html,
+under the "Building Projects with Native Code" tab to setup your dev environment (Get ANDROID_HOME var all set, install xCode if ur on a Mac)
+
+Pay close attention the the version numbers specified under in the "Installing Dependencies" section
+for both Android and iOS subtabs. Some long installs may follow e.g. XCode (updating of which might
+necessitate updating your OS)
+
 
 #### Git clone the project, then rename it
 ```bash
 $ npm install -g react-native-cli
 $ npm install -g react-native-rename
-$ git clone https://github.com/wswoodruff/strangeluv-native my-project
+$ git clone git@github.com:BigRoomStudios/strangeluv-native.git my-project
 $ cd my-project   # Then adjust package.json and readme as necessary
-$ react-native-rename mynewprojectname # No spaces or capitals are allowed or this won't work on Android!
 $ grep -e 'strangeluvnative' -rl . | xargs sed -i '' 's/strangeluvnative/mynewprojectname/g'
+# Where mynewprojectname is whatever you want to name your project's package e.g. in package.json
+# No spaces or capitals are allowed or this won't work for Android!
 # Note: the grep line above was reported as non-working on another computer. If you'd like to PR
 # a better find-and-replace one-liner or short script for this, that'd be welcome! =)
 
 $ npm run fresh-install
-# Make sure to answer "n to keep your version" when you're prompted with ".babelrc has changed in the new version.
-Do you want to keep your .babelrc or replace it with the latest version?" after running fresh-install
+# You'll hit a series of prompts like ".babelrc has changed in the new version.
+# Do you want to keep your .babelrc or replace it with the latest version?" after running fresh-install
+# Make sure to answer "n to keep your version" to all of them
 
 $ npm run dev     # Compile and launch to iOS simulator
 ```
@@ -163,8 +170,8 @@ We favor the [hapi style guide](hapijs.com/styleguide).  Yes, even when coding f
 ### Developer Tools
 - You get Redux dev tools inside react-native's "native" debugger! To enable remote debugging, open the menu once inside the app via Cmd+D, etc. and hit "Debug JS Remotely".
 
-#### Works with 
-- [remote-redux-devtools](https://github.com/zalmoxisus/remote-redux-devtools) and 
+#### Works with
+- [remote-redux-devtools](https://github.com/zalmoxisus/remote-redux-devtools) and
 - [remote-redux-devtools-on-debugger](https://github.com/jhen0409/remote-redux-devtools-on-debugger)
 - HMR support for reducers! Your reducers will update without reloading if you've enabled hot module reloading.
 
@@ -172,7 +179,7 @@ We favor the [hapi style guide](hapijs.com/styleguide).  Yes, even when coding f
 You can require the top-level folders like `require(containers/App);` because of the setup in `.babelrc`.
 
 ### Routing
-We use `react-navigation` 
+We use `react-navigation`
 [navigator definitions](https://reactnavigation.org/docs/navigators/stack#StackNavigatorConfig) and
 [route definitions](https://reactnavigation.org/docs/navigators/stack#RouteConfigs) (`<route>/index.js`)
 
