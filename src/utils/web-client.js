@@ -11,7 +11,7 @@ const internals = {
         return `${host}${prefix}`;
     }
 };
-// console.warn(internals.getApiBase());
+
 const client = module.exports = Axios.create({
     baseURL: internals.getApiBase(),
     responseType: 'json',

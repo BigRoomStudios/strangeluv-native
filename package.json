@@ -64,6 +64,7 @@
         "pre-commit": "^1.2.2",
         "react-devtools": "^3.3.4",
         "react-native-rename": "^2.2.2",
-        "redux-devtools-extension": "^2.13.5"
+        "redux-devtools-extension": "^2.13.5",
+        "schedule": "^0.4.0"
     }
 }
