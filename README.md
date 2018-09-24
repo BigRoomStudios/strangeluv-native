@@ -40,6 +40,15 @@ Pay close attention the the version numbers specified under in the "Installing D
 for both Android and iOS subtabs. Some long installs may follow e.g. XCode (updating of which might
 necessitate updating your OS)
 
+### Hot Reloading and Debugging
+
+To make your local development life easier, check out http://facebook.github.io/react-native/docs/debugging
+for a handful of useful tips on debugging.
+
+Given that our installation is iOS oriented (insofar as `npm run dev` opens the iOS version of the app),
+pay attention to the iOS Simulator hotkeys in that guide
+
+
 
 #### Git clone the project, then rename it
 ```bash
