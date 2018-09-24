@@ -28,6 +28,7 @@ module.exports = class ForgotPassword extends StrangeForms(React.Component) {
 
         this.showEmailError = this._showEmailError.bind(this);
         this.emailFieldBlurred = this._emailFieldBlurred.bind(this);
+        this.emailFieldFocused = this._emailFieldFocused.bind(this);
         this.disableButton = this._disableButton.bind(this);
         this.getFormValue = this._getFormValue.bind(this);
         this.submit = this._submit.bind(this);
@@ -51,9 +52,14 @@ module.exports = class ForgotPassword extends StrangeForms(React.Component) {
         this.setState({ hasEmailBlurred: true });
     }
 
+    _emailFieldFocused() {
+
+        this.setState({ hasEmailBlurred: false });
+    }
+
     _showEmailError() {
 
-        return this.state.hasEmailBlurred && !IsEmail(this.state.email);
+        return this.state.hasEmailBlurred && (!!this.state.email && !IsEmail(this.state.email));
     }
 
     _disableButton() {
@@ -79,12 +85,13 @@ module.exports = class ForgotPassword extends StrangeForms(React.Component) {
             <StyledScrollView>
                 <TitleContainer>
                     <Title>Forgot Your Password?</Title>
-                    <StylishText>To reset your password, enter your email below and we will email a link to reset your password.</StylishText>
+                    <StylishText>To reset your password, enter your email below and we will email a code to reset your password.</StylishText>
                 </TitleContainer>
                 <InputField
                     hasError={this.showEmailError()}
                     onChangeText={this.proposeNew('email')}
                     onBlur={this.emailFieldBlurred}
+                    onFocus={this.emailFieldFocused}
                     value={this.fieldValue('email')}
                     placeholder='Email Address'
                     iconName='envelope'
