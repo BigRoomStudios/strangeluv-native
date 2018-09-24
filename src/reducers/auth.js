@@ -1,6 +1,8 @@
 const AuthTypes = require('../action-types/auth');
 const StrangeAuth = require('strange-auth');
 const Deeply = require('utils/deeply');
+const { NavigationActions } = require('react-navigation');
+
 
 const authReducer = StrangeAuth.makeReducer();
 
@@ -10,16 +12,7 @@ module.exports = (state, action) => {
 
     const { type, payload } = action;
 
-    /* eslint-disable indent */
-    // eslint doesn't like our usual format for Deeply chains
     switch (type) {
-
-        // Example of modifying a strange-auth action-type
-        case StrangeAuth.types.LOGIN_FAIL:
-
-            return Deeply(state)
-                .set('error.message', 'Login failed, please check your email and password.')
-                .value();
 
         // Set server error message in state to display on our components
         // TODO one day clean this up with some action creator magic
@@ -31,8 +24,24 @@ module.exports = (state, action) => {
             return Deeply(state)
                 .set('error.message', payload)
                 .value();
+
+        // Clear server error message on route change to prevent
+        // error messages from displaying when it doesn't make sense to the user
+        // example: login attempt fails, user navigates away then back to login
+        // user wouldn't expect to see the login error
+        case NavigationActions.NAVIGATE:
+
+            return Deeply(state)
+                .set('error.message', null)
+                .value();
+
+        // Example of modifying a strange-auth action-type
+        case StrangeAuth.types.LOGIN_FAIL:
+
+            return Deeply(state)
+                .set('error.message', 'Login failed, please check your email and password.')
+                .value();
     }
-    /* eslint-enable indent */
 
     return state;
 };

@@ -4,10 +4,8 @@ const StrangeForms = require('strange-forms');
 const IsEmail = require('utils/is-email');
 
 const GStyles = require('styles'); // global styles
-const LStyles = require('./styles'); // local styles
 
-const { Title } = GStyles;
-const { StylishText, ErrorText, StyledScrollView, TitleContainer } = LStyles;
+const { Title, StylishText, ErrorText, StyledScrollView, TitleContainer } = GStyles;
 
 const InputField = require('components/InputField');
 const DefaultButton = require('components/DefaultButton');
@@ -24,12 +22,12 @@ module.exports = class ResetPassword extends StrangeForms(React.Component) {
         super(props);
 
         this.state = {
-            token: '',
             email: '',
+            resetToken: '',
             password: '',
             confirmPassword: '',
             isBlurred: {
-                // TODO Do we want to care about token errors?
+                // TODO Do we want to care about resetToken errors?
                 email: false,
                 confirmPassword: false
             }
@@ -45,7 +43,7 @@ module.exports = class ResetPassword extends StrangeForms(React.Component) {
         this.submit = this._submit.bind(this);
 
         this.strangeForm({
-            fields: ['token', 'email', 'password', 'confirmPassword'],
+            fields: ['email', 'resetToken', 'password', 'confirmPassword'],
             get: (someProps, field) => this.state[field],
             act: (field, value) => this.setState({ [field]: value }),
             getFormValue: this.getFormValue
@@ -58,13 +56,10 @@ module.exports = class ResetPassword extends StrangeForms(React.Component) {
         return value;
     }
 
-    _fieldBlurred(ev) {
+    _fieldBlurred(field) {
 
         const isBlurred = { ...this.state.isBlurred };
-        const field = ev.nativeEvent.target.id;
-        console.log(ev, 'WHAT THE FUCK DOES THIS LOOK LIKE', field);
         isBlurred[field] = true;
-
         this.setState({ isBlurred });
     }
 
@@ -85,11 +80,9 @@ module.exports = class ResetPassword extends StrangeForms(React.Component) {
 
     _disableButton() {
 
-        const { token, email, password } = this.state;
-        // TODO Is this at all right?
-        const fieldHasValue = (token && email && password) !== '';
+        const { email, resetToken } = this.state;
 
-        if (fieldHasValue && IsEmail(email) && this.passwordsMatch()) {
+        if (IsEmail(email) && resetToken !== '' && this.passwordsMatch()) {
             return false;
         }
 
@@ -98,10 +91,10 @@ module.exports = class ResetPassword extends StrangeForms(React.Component) {
 
     _submit() {
 
-        const { token, email, password } = this.state;
+        const { email, resetToken, password } = this.state;
 
-        // TODO Need to reset the form, so form is empty on navigating back
-        this.props.resetPassword(token, email, password);
+        // TODO Need to reset the form, so form is empty on navigating back?
+        this.props.resetPassword(email, password, resetToken);
     }
 
     render() {
@@ -111,13 +104,13 @@ module.exports = class ResetPassword extends StrangeForms(React.Component) {
         return (
             <StyledScrollView>
                 <TitleContainer>
-                    <Title>Forgot Your Password?</Title>
-                    <StylishText>To reset your password, enter your email below and we will email a link to reset your password.</StylishText>
+                    <Title>Reset Password</Title>
+                    <StylishText>Please confirm your email address, enter the reset code you received via email, and set your new password below.</StylishText>
                 </TitleContainer>
                 <InputField
                     hasError={this.showEmailError()}
                     onChangeText={this.proposeNew('email')}
-                    onBlur={this.emailFieldBlurred}
+                    onBlur={() => this.fieldBlurred('email')}
                     value={this.fieldValue('email')}
                     placeholder='Email Address'
                     iconName='envelope'
@@ -128,12 +121,42 @@ module.exports = class ResetPassword extends StrangeForms(React.Component) {
                 {this.showEmailError() &&
                     <ErrorText>Please enter a valid email address</ErrorText>
                 }
+                <InputField
+                    onChangeText={this.proposeNew('resetToken')}
+                    value={this.fieldValue('resetToken')}
+                    placeholder='Password Reset Code'
+                    iconName='envelope'
+                    keyboardType='number-pad'
+                    autoCorrect={false}
+                    iconSize={18}
+                />
+                <InputField
+                    onChangeText={this.proposeNew('password')}
+                    value={this.fieldValue('password')}
+                    placeholder='Password'
+                    iconName='unlock-alt'
+                    secureTextEntry
+                />
+                <InputField
+                    hasError={this.showPasswordError()}
+                    onBlur={() => this.fieldBlurred('confirmPassword')}
+                    onChangeText={this.proposeNew('confirmPassword')}
+                    value={this.fieldValue('confirmPassword')}
+                    placeholder='Confirm Password'
+                    // TODO Pick new icon
+                    iconName='unlock-alt'
+                    secureTextEntry
+                />
+                {this.showPasswordError() &&
+                    <ErrorText>Please enter matching passwords</ErrorText>
+                }
                 {this.props.errorMessage &&
                     <ErrorText>{this.props.errorMessage}</ErrorText>
                 }
                 <DefaultButton
                     onPress={this.submit}
-                    text='GET A PASSWORD RESET LINK'
+                    text='UPDATE PASSWORD'
+                    // TODO Pick new icon
                     icon='inbox'
                     disabled={this.disableButton()}
                 />

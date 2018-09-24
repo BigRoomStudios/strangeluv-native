@@ -4,10 +4,8 @@ const StrangeForms = require('strange-forms');
 const IsEmail = require('utils/is-email');
 
 const GStyles = require('styles'); // global styles
-const LStyles = require('./styles'); // local styles
 
-const { Title } = GStyles;
-const { StylishText, ErrorText, StyledScrollView, TitleContainer } = LStyles;
+const { Title, StylishText, ErrorText, StyledScrollView, TitleContainer } = GStyles;
 
 const InputField = require('components/InputField');
 const DefaultButton = require('components/DefaultButton');
@@ -102,7 +100,7 @@ module.exports = class ForgotPassword extends StrangeForms(React.Component) {
                 }
                 <DefaultButton
                     onPress={this.submit}
-                    text='GET A PASSWORD RESET LINK'
+                    text='GET A PASSWORD RESET CODE'
                     icon='inbox'
                     disabled={this.disableButton()}
                 />
