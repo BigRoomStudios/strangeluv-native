@@ -1,12 +1,8 @@
 const React = require('react');
 const T = require('prop-types');
-
-const LStyles = require('./styles');
 const Theme = require('styles/theme');
-
 const Icon = require('react-native-vector-icons/FontAwesome').default;
-
-const { InputContainer, InputIconContainer, StyledInput, ErrorInput } = LStyles;
+const { InputContainer, InputIconContainer, StyledInput, ErrorInput } = require('./styles');
 
 module.exports = class InputField extends React.PureComponent {
 

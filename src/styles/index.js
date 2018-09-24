@@ -42,11 +42,6 @@ module.exports = {
         color: ${Theme.primaryColor};
         padding-top: 8px;
     `,
-    ErrorText: styled(Text)`
-        color: red;
-        padding-top: 4px;
-        padding-bottom: 4px;
-    `,
     StyledScrollView: styled(ScrollView)`
       background-color: ${Theme.primaryBgColor};
     `,
@@ -55,5 +50,9 @@ module.exports = {
     `,
     InheritStylesText: styled(Text)`
         color: ${(props) => props.color || Theme.secondaryColor}
+    `,
+    ErrorText: styled.Text`
+        color: red;
+        padding-bottom: 12px;
     `
 };

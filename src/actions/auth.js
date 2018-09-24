@@ -23,6 +23,10 @@ exports.registrationFailure = (errMessage) => ({
     payload: errMessage
 });
 
+exports.clearErrors = () => ({
+    type: AuthAct.CLEAR_AUTH_ERRORS
+});
+
 exports.registerUser = ({ email, password, firstName, lastName }) => {
 
     return (dispatch) => {
@@ -47,8 +51,6 @@ exports.registerUser = ({ email, password, firstName, lastName }) => {
 
             dispatch(actions.registrationFailure(errMessage));
         });
-
-        return newUser;
     };
 };
 
@@ -57,17 +59,12 @@ exports.login = ({ email, password, token }) => {
 
     return (dispatch) => {
 
-        const strangeLogin = internals.strangeActions.login({ email, password, token });
-
-        return dispatch(strangeLogin)
+        return dispatch(internals.strangeActions.login({ email, password, token }))
         .then((result) => {
 
-            NavigationService.navigate('Dashboard');
+            NavigationService.reset('Dashboard');
         })
-        .catch((err) => {
-
-            console.warn(err.response.data.message);
-        });
+        .catch((ignoreErr) => {});
     };
 };
 
@@ -76,7 +73,7 @@ exports.logout = () => {
     return (dispatch) => {
 
         dispatch(internals.strangeActions.logout());
-        NavigationService.navigate('Home');
+        NavigationService.reset('Home');
     };
 };
 

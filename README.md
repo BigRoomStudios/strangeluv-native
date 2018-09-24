@@ -75,7 +75,13 @@ If all goes well you should see something like this,
 |`dev`, `i`, `ios`|Starts the app in an iOS simulator|
 |`a`, `android`|Starts the app in an Android simulator|
 
-
+## Generate app icons
+- `npm install app-icon -g`
+- `brew install imagemagick`
+- add an square image named icon.png
+   - 512x512px or greater
+   - place into the project directory
+- `app-icon generate`
 
 ## Application Structure
 

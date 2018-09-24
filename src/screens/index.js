@@ -1,4 +1,5 @@
 const Login = require('./login');
+const Signup = require('./signup');
 const Home = require('./home');
 const Dashboard = require('./dashboard');
 const ForgotPassword = require('./forgot-password');
@@ -14,6 +15,7 @@ module.exports = (store) => {
     return {
         routeConfig: {
             Home,
+            Signup,
             Login,
             Dashboard,
             ForgotPassword,

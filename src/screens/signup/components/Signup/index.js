@@ -7,17 +7,16 @@ const IsEmail = require('utils/is-email');
 const GStyles = require('styles'); // global styles
 const LStyles = require('./styles'); // local styles
 
-const { Title, InheritStylesText, ErrorText } = GStyles;
+const { Title, ErrorText } = GStyles;
 const { StylishText, StyledScrollView, TitleContainer } = LStyles;
-
 
 const InputField = require('components/InputField');
 const DefaultButton = require('components/DefaultButton');
 
-module.exports = class Login extends StrangeForms(React.Component) {
+module.exports = class Signup extends StrangeForms(React.Component) {
 
     static propTypes = {
-        login: T.func.isRequired,
+        signup: T.func.isRequired,
         errorMessage: T.string,
         authError: T.string,
         clearErrors: T.func.isRequired
@@ -28,6 +27,8 @@ module.exports = class Login extends StrangeForms(React.Component) {
         super(props, context);
 
         this.state = {
+            firstName: '',
+            lastName: '',
             email: '',
             password: '',
             hasEmailBlurred: false
@@ -38,21 +39,24 @@ module.exports = class Login extends StrangeForms(React.Component) {
         this.emailFieldBlurred = this._emailFieldBlurred.bind(this);
 
         this.strangeForm({
-            fields: ['email', 'password'],
+            fields: ['firstName', 'lastName', 'email', 'password'],
             get: (someProps, field) => this.state[field],
             act: (field, value) => this.setState({ [field]: value }),
             getFormValue: this.getFormValue
         });
     }
 
-    componentDidMount() {
+    componentWillMount() {
 
         this.props.clearErrors();
     }
 
     inputsAreValid() {
 
-        return this.state.email !== '' && this.state.password !== '' && !this.showEmailError();
+        return this.state.password !== ''
+        && this.state.firstName !== ''
+        && this.state.lastName !== ''
+        && IsEmail(this.state.email);
     }
 
     _getFormValue(value) {
@@ -62,9 +66,9 @@ module.exports = class Login extends StrangeForms(React.Component) {
 
     _submit() {
 
-        const { email, password } = this.state;
+        const { email, password, firstName, lastName } = this.state;
 
-        this.props.login({ email, password });
+        this.props.signup({ email, password, firstName, lastName });
     }
 
     _emailFieldBlurred() {
@@ -79,15 +83,29 @@ module.exports = class Login extends StrangeForms(React.Component) {
 
     render() {
 
-        const { navigation, isAuthenticated } = this.props;
-
         return (
 
             <StyledScrollView>
                 <TitleContainer>
-                    <Title>User Login</Title>
-                    <StylishText>Welcome back to Strangeluv Native!</StylishText>
+                    <Title>User Signup</Title>
+                    <StylishText>Signup with Strangeluv Native</StylishText>
                 </TitleContainer>
+                <InputField
+                    onChangeText={this.proposeNew('firstName')}
+                    value={this.fieldValue('firstName')}
+                    placeholder='First Name'
+                    iconName='user'
+                    autoCorrect={false}
+                    iconSize={18}
+                />
+                <InputField
+                    onChangeText={this.proposeNew('lastName')}
+                    value={this.fieldValue('lastName')}
+                    placeholder='Last Name'
+                    iconName='user'
+                    autoCorrect={false}
+                    iconSize={18}
+                />
                 <InputField
                     hasError={this.showEmailError()}
                     onChangeText={this.proposeNew('email')}
@@ -115,16 +133,10 @@ module.exports = class Login extends StrangeForms(React.Component) {
                 {this.inputsAreValid() &&
                     <DefaultButton
                         onPress={this.submit}
-                        text='LOGIN'
-                        icon='sign-in'
+                        text='SIGNUP'
+                        icon='user'
                     />
                 }
-                {!isAuthenticated && <InheritStylesText onPress={() => navigation.navigate('ForgotPassword')}>
-                    Forgot Your Password?
-                </InheritStylesText>}
-                {!isAuthenticated && <InheritStylesText onPress={() => navigation.navigate('ResetPassword')}>
-                    Reset Your Password
-                </InheritStylesText>}
             </StyledScrollView>
         );
     }

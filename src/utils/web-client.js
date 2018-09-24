@@ -2,8 +2,8 @@ const Axios = require('axios');
 
 const internals = {
     //Configure this to your environment
-    host: process.env.API_HOST || 'http://localhost:4000',
-    prefix: process.env.API_PREFIX || '/api',
+    host: process.env.API_HOST || '',
+    prefix: process.env.API_PREFIX || '',
     getApiBase: () => {
 
         const { host, prefix } = internals;
@@ -11,7 +11,7 @@ const internals = {
         return `${host}${prefix}`;
     }
 };
-// console.warn(internals.getApiBase());
+
 const client = module.exports = Axios.create({
     baseURL: internals.getApiBase(),
     responseType: 'json',
