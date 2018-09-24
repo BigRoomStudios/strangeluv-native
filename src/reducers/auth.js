@@ -22,8 +22,8 @@ module.exports = (state, action) => {
         case AuthTypes.RESET_PASSWORD_FAILURE:
 
             return Deeply(state)
-                .set('error.message', payload)
-                .value();
+            .set('error.message', payload)
+            .value();
 
         // Clear server error message on route change to prevent
         // error messages from displaying when it doesn't make sense to the user
@@ -32,15 +32,15 @@ module.exports = (state, action) => {
         case NavigationActions.NAVIGATE:
 
             return Deeply(state)
-                .set('error.message', null)
-                .value();
+            .set('error.message', null)
+            .value();
 
         // Example of modifying a strange-auth action-type
         case StrangeAuth.types.LOGIN_FAIL:
 
             return Deeply(state)
-                .set('error.message', 'Login failed, please check your email and password.')
-                .value();
+            .set('error.message', 'Login failed, please check your email and password.')
+            .value();
     }
 
     return state;
