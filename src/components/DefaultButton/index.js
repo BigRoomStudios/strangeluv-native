@@ -1,8 +1,7 @@
 const React = require('react');
 const T = require('prop-types');
+const { Button, Icon, Text } = require('native-base');
 const Theme = require('styles/theme');
-const Icon = require('react-native-vector-icons/FontAwesome').default;
-const { Button, ButtonText } = require('./styles');
 
 module.exports = class DefaultButton extends React.PureComponent {
 
@@ -20,9 +19,9 @@ module.exports = class DefaultButton extends React.PureComponent {
                 {this.props.icon &&
                     <Icon name={this.props.icon} size={24} color={Theme.secondaryColor} />
                 }
-                <ButtonText>
+                <Text>
                     {this.props.text}
-                </ButtonText>
+                </Text>
             </Button>
         );
     }

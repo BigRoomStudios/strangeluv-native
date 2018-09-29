@@ -4,14 +4,9 @@ const StrangeForms = require('strange-forms');
 
 const IsEmail = require('utils/is-email');
 
-const GStyles = require('styles'); // global styles
-const LStyles = require('./styles'); // local styles
+const { Button, Input } = require('styles');
 
-const { Title, ErrorText } = GStyles;
-const { StylishText, StyledScrollView, TitleContainer } = LStyles;
-
-const InputField = require('components/InputField');
-const DefaultButton = require('components/DefaultButton');
+const { Container, Text } = require('native-base');
 
 module.exports = class Login extends StrangeForms(React.Component) {
 
@@ -80,12 +75,12 @@ module.exports = class Login extends StrangeForms(React.Component) {
 
         return (
 
-            <StyledScrollView>
-                <TitleContainer>
-                    <Title>User Login</Title>
-                    <StylishText>Welcome back to Strangeluv Native!</StylishText>
-                </TitleContainer>
-                <InputField
+            <Container>
+                <Container>
+                    <Text>User Login</Text>
+                    <Text>Welcome back to Strangeluv Native!</Text>
+                </Container>
+                <Input
                     hasError={this.showEmailError()}
                     onChangeText={this.proposeNew('email')}
                     onBlur={this.emailFieldBlurred}
@@ -97,9 +92,9 @@ module.exports = class Login extends StrangeForms(React.Component) {
                     iconSize={18}
                 />
                 {this.showEmailError() &&
-                    <ErrorText>Please enter a valid email address</ErrorText>
+                    <Text>Please enter a valid email address</Text>
                 }
-                <InputField
+                <Input
                     onChangeText={this.proposeNew('password')}
                     value={this.fieldValue('password')}
                     placeholder='Password'
@@ -107,16 +102,16 @@ module.exports = class Login extends StrangeForms(React.Component) {
                     secureTextEntry
                 />
                 {this.props.authError &&
-                    <ErrorText>{this.props.authError}</ErrorText>
+                    <Text>{this.props.authError}</Text>
                 }
                 {this.inputsAreValid() &&
-                    <DefaultButton
+                    <Button
                         onPress={this.submit}
                         text='LOGIN'
-                        icon='sign-in'
+                        icon='md-log-in'
                     />
                 }
-            </StyledScrollView>
+            </Container>
         );
     }
 };

@@ -3,15 +3,8 @@ const T = require('prop-types');
 const StrangeForms = require('strange-forms');
 
 const IsEmail = require('utils/is-email');
-
-const GStyles = require('styles'); // global styles
-const LStyles = require('./styles'); // local styles
-
-const { Title, ErrorText } = GStyles;
-const { StylishText, StyledScrollView, TitleContainer } = LStyles;
-
-const InputField = require('components/InputField');
-const DefaultButton = require('components/DefaultButton');
+const { Container, Text } = require('native-base');
+const { Button, Input } = require('styles');
 
 module.exports = class Signup extends StrangeForms(React.Component) {
 
@@ -85,12 +78,10 @@ module.exports = class Signup extends StrangeForms(React.Component) {
 
         return (
 
-            <StyledScrollView>
-                <TitleContainer>
-                    <Title>User Signup</Title>
-                    <StylishText>Signup with Strangeluv Native</StylishText>
-                </TitleContainer>
-                <InputField
+            <Container>
+                <Text>User Signup</Text>
+                <Text>Signup with Strangeluv Native</Text>
+                <Input
                     onChangeText={this.proposeNew('firstName')}
                     value={this.fieldValue('firstName')}
                     placeholder='First Name'
@@ -98,7 +89,7 @@ module.exports = class Signup extends StrangeForms(React.Component) {
                     autoCorrect={false}
                     iconSize={18}
                 />
-                <InputField
+                <Input
                     onChangeText={this.proposeNew('lastName')}
                     value={this.fieldValue('lastName')}
                     placeholder='Last Name'
@@ -106,7 +97,7 @@ module.exports = class Signup extends StrangeForms(React.Component) {
                     autoCorrect={false}
                     iconSize={18}
                 />
-                <InputField
+                <Input
                     hasError={this.showEmailError()}
                     onChangeText={this.proposeNew('email')}
                     onBlur={this.emailFieldBlurred}
@@ -118,9 +109,9 @@ module.exports = class Signup extends StrangeForms(React.Component) {
                     iconSize={18}
                 />
                 {this.showEmailError() &&
-                    <ErrorText>Please enter a valid email address</ErrorText>
+                    <Text>Please enter a valid email address</Text>
                 }
-                <InputField
+                <Input
                     onChangeText={this.proposeNew('password')}
                     value={this.fieldValue('password')}
                     placeholder='Password'
@@ -128,16 +119,16 @@ module.exports = class Signup extends StrangeForms(React.Component) {
                     secureTextEntry
                 />
                 {this.props.authError &&
-                    <ErrorText>{this.props.authError}</ErrorText>
+                    <Text>{this.props.authError}</Text>
                 }
                 {this.inputsAreValid() &&
-                    <DefaultButton
+                    <Button
                         onPress={this.submit}
                         text='SIGNUP'
                         icon='user'
                     />
                 }
-            </StyledScrollView>
+            </Container>
         );
     }
 };
