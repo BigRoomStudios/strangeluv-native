@@ -1,5 +1,5 @@
 const { default: styled } = require('styled-components/native');
-const { Card, Container, Footer, Text } = require('native-base');
+const { Card, Container, Text } = require('native-base');
 
 module.exports = {
     Duck: styled.Image`
@@ -11,12 +11,9 @@ module.exports = {
         margin: 0 auto;
     `,
     Container: styled(Container)`
-        background-color: #888;
+      background: transparent;
     `,
     Card: styled(Card)`
         margin: 10px 0 15px 0;
-    `,
-    Footer: styled(Footer)`
-        background-color: #fff;
     `
 };

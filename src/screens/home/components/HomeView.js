@@ -1,8 +1,8 @@
 const React = require('react');
 const T = require('prop-types');
 const { CardItem } = require('native-base');
-const { Button, ScrollView } = require('styles');
-const { Card, Container, Duck, Footer, Text } = require('./styles');
+const { FooterNav, ScrollView } = require('styles');
+const { Card, Container, Duck, Text } = require('./styles');
 
 module.exports = class HomeView extends React.PureComponent {
 
@@ -43,52 +43,11 @@ module.exports = class HomeView extends React.PureComponent {
                         </CardItem>
                     </Card>
                 </ScrollView>
-                <Footer>
-                    <Button
-                        transparent
-                        color='#b71c1c'
-                        onPress={() => navigation.navigate('Home')}
-                        icon='home'
-                        text='Home'
-                        iconLeft
-                    />
-                    {!isAuthenticated &&
-                        <Button
-                            transparent
-                            onPress={() => navigation.navigate('Login')}
-                            icon='log-in'
-                            text='Log-in'
-                            iconLeft
-                        />
-                    }
-                    {!isAuthenticated &&
-                        <Button
-                            transparent
-                            onPress={() => navigation.navigate('Signup')}
-                            icon='person-add'
-                            text='Sign-up'
-                            iconLeft
-                        />
-                    }
-                    {isAuthenticated &&
-                        <Button
-                            transparent
-                            onPress={() => navigation.navigate('Dashboard')}
-                            icon='dashboard'
-                            text='Dashboard'
-                            iconLeft
-                        />
-                    }
-                    {isAuthenticated &&
-                        <Button
-                            transparent
-                            onPress={logout}
-                            icon='log-out'
-                            text='Logout'
-                            iconLeft
-                        />
-                    }
-                </Footer>
+                <FooterNav
+                    isAuthenticated={isAuthenticated}
+                    logout={logout}
+                    navigation={navigation}
+                />
             </Container>
         );
     }

@@ -1,6 +1,7 @@
 const { default: styled } = require('styled-components/native');
 const DefaultButton = require('components/DefaultButton');
 const InputField = require('components/InputField');
+const FooterNav = require('components/FooterNav');
 
 module.exports = {
 
@@ -12,5 +13,7 @@ module.exports = {
     Button: styled(DefaultButton)`
     `,
     Input: styled(InputField)`
+    `,
+    FooterNav: styled(FooterNav)`
     `
 };

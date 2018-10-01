@@ -4,9 +4,9 @@ const StrangeForms = require('strange-forms');
 
 const IsEmail = require('utils/is-email');
 
-const { Button, Input } = require('styles');
-
-const { Container, Text } = require('native-base');
+const { Text, CardItem, Form, Item, Label } = require('native-base');
+const { ScrollView, Button, Input } = require('styles');
+const { Card } = require('./styles');
 
 module.exports = class Login extends StrangeForms(React.Component) {
 
@@ -75,43 +75,50 @@ module.exports = class Login extends StrangeForms(React.Component) {
 
         return (
 
-            <Container>
-                <Container>
-                    <Text>User Login</Text>
-                    <Text>Welcome back to Strangeluv Native!</Text>
-                </Container>
-                <Input
-                    hasError={this.showEmailError()}
-                    onChangeText={this.proposeNew('email')}
-                    onBlur={this.emailFieldBlurred}
-                    value={this.fieldValue('email')}
-                    placeholder='Email Address'
-                    iconName='envelope'
-                    keyboardType='email-address'
-                    autoCorrect={false}
-                    iconSize={18}
-                />
-                {this.showEmailError() &&
-                    <Text>Please enter a valid email address</Text>
-                }
-                <Input
-                    onChangeText={this.proposeNew('password')}
-                    value={this.fieldValue('password')}
-                    placeholder='Password'
-                    iconName='unlock-alt'
-                    secureTextEntry
-                />
-                {this.props.authError &&
-                    <Text>{this.props.authError}</Text>
-                }
-                {this.inputsAreValid() &&
-                    <Button
-                        onPress={this.submit}
-                        text='LOGIN'
-                        icon='md-log-in'
-                    />
-                }
-            </Container>
+            <ScrollView>
+                <Card>
+                    <CardItem header bordered>
+                        <Text>User Login</Text>
+                    </CardItem>
+                    <Form>
+                        <Item stackedLabel>
+                            {this.showEmailError() &&
+                                <Label>Please enter a valid email address</Label>
+                            }
+                            <Input
+                                hasError={this.showEmailError()}
+                                onChangeText={this.proposeNew('email')}
+                                onBlur={this.emailFieldBlurred}
+                                value={this.fieldValue('email')}
+                                placeholder='Email Address'
+                                keyboardType='email-address'
+                                autoCorrect={false}
+                            />
+                        </Item>
+                        <Item>
+                            <Input
+                                onChangeText={this.proposeNew('password')}
+                                value={this.fieldValue('password')}
+                                placeholder='Password'
+                                secureTextEntry
+                            />
+                        </Item>
+                        <Item>
+                            {this.props.authError &&
+                                <Label>{this.props.authError}</Label>
+                            }
+                        </Item>
+                    </Form>
+                    {this.inputsAreValid() &&
+                        <Button
+                            onPress={this.submit}
+                            text='LOGIN'
+                            icon='md-log-in'
+                            iconLeft
+                        />
+                    }
+                </Card>
+            </ScrollView>
         );
     }
 };

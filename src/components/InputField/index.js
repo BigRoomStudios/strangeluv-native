@@ -18,7 +18,7 @@ module.exports = class InputField extends React.PureComponent {
         return (
 
             <Input
-                placeholderTextColor='#000'
+                placeholderTextColor='#999'
                 autoCapitalize='none'
                 underlineColorAndroid='transparent'
                 selectionColor='#fff'
