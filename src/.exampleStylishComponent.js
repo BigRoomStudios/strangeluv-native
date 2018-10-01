@@ -1,17 +1,7 @@
 const React = require('react');
 const PropTypes = require('prop-types');
-
-// Styles
-const { default: styled } = require('styled-components/native');
-const Theme = require('styles/theme');
-const GStyles = require('styles'); // global styles
-// const LStyles = require('./styles'); // local styles
-
-const { ScrollView, Text } = GStyles;
-
-const StylishText = styled(Text)`
-    color: ${Theme.primaryColor}
-`;
+const { Text } = require('native-base');
+const { ScrollView } = require('styles');
 
 module.exports = class Stylish extends React.PureComponent {
 
@@ -21,7 +11,7 @@ module.exports = class Stylish extends React.PureComponent {
 
         return (
             <ScrollView>
-                <StylishText>Welcome!</StylishText>
+                <Text>Welcome!</Text>
             </ScrollView>
         );
     }

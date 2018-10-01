@@ -1,13 +1,13 @@
 const React = require('react');
 const T = require('prop-types');
-const { Button, Icon, Text } = require('native-base');
-const Theme = require('styles/theme');
+const { Icon, Text } = require('native-base');
+const { Button } = require('./styles');
 
 module.exports = class DefaultButton extends React.PureComponent {
 
     static propTypes = {
         icon: T.string,
-        text: T.string.isRequired,
+        text: T.string,
         onPress: T.func.isRequired
     };
 
@@ -15,13 +15,15 @@ module.exports = class DefaultButton extends React.PureComponent {
 
         return (
 
-            <Button onPress={this.props.onPress}>
+            <Button {...this.props}>
                 {this.props.icon &&
-                    <Icon name={this.props.icon} size={24} color={Theme.secondaryColor} />
+                    <Icon name={this.props.icon} size={24} />
                 }
-                <Text>
-                    {this.props.text}
-                </Text>
+                {this.props.text &&
+                    <Text>
+                        {this.props.text}
+                    </Text>
+                }
             </Button>
         );
     }

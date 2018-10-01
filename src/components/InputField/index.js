@@ -1,6 +1,5 @@
 const React = require('react');
 const T = require('prop-types');
-const Theme = require('styles/theme');
 const { Input } = require('native-base');
 
 module.exports = class InputField extends React.PureComponent {
@@ -19,7 +18,7 @@ module.exports = class InputField extends React.PureComponent {
         return (
 
             <Input
-                placeholderTextColor={Theme.primaryColor}
+                placeholderTextColor='#000'
                 autoCapitalize='none'
                 underlineColorAndroid='transparent'
                 selectionColor='#fff'
