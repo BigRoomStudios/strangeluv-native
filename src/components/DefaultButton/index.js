@@ -16,7 +16,7 @@ module.exports = class DefaultButton extends React.PureComponent {
 
             <Button {...this.props}>
                 {this.props.icon &&
-                    <Icon name={this.props.icon} size={24} />
+                    <Icon name={this.props.icon} />
                 }
                 {this.props.text &&
                     <Text>

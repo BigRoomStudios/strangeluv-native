@@ -20,7 +20,6 @@ module.exports = class FooterNav extends React.PureComponent {
             <Footer>
                 <DefaultButton
                     transparent
-                    color='#b71c1c'
                     onPress={() => navigation.navigate('Home')}
                     icon='home'
                     text='Home'
