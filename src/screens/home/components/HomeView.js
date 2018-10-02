@@ -22,7 +22,7 @@ module.exports = class HomeView extends React.PureComponent {
                 <ScrollView>
                     <Card>
                         <CardItem header bordered>
-                            <Text>Yo! I'm Strangeluv Native</Text>
+                            <Text>Yo! I am Strangeluv Native</Text>
                         </CardItem>
                         <CardItem bordered>
                             <Duck source={require('../assets/duck.png')} />
@@ -33,7 +33,7 @@ module.exports = class HomeView extends React.PureComponent {
                     </Card>
                     <Card>
                         <CardItem header bordered>
-                            <Text>It's an Auth Recipe</Text>
+                            <Text>It is a Auth Recipe</Text>
                         </CardItem>
                         <CardItem bordered>
                             <Duck source={require('../assets/icon.png')} />
