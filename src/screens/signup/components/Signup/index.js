@@ -111,7 +111,7 @@ module.exports = class Signup extends StrangeForms(React.PureComponent) {
                                 placeholder='Email Address'
                                 keyboardType='email-address'
                                 autoCorrect={false}
-                                autoCapitalize={false}
+                                autoCapitalize='none'
                             />
                         </Item>
                         {this.showEmailError() &&
