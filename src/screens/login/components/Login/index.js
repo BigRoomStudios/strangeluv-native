@@ -4,9 +4,9 @@ const StrangeForms = require('strange-forms');
 
 const IsEmail = require('utils/is-email');
 
-const { Text, CardItem, Form, Item, Label } = require('native-base');
+const { Text, CardItem, Label, Icon } = require('native-base');
 const { ScrollView, Button, Input } = require('styles');
-const { Card } = require('./styles');
+const { Card, Form, Item } = require('./styles');
 
 module.exports = class Login extends StrangeForms(React.Component) {
 
@@ -81,10 +81,8 @@ module.exports = class Login extends StrangeForms(React.Component) {
                         <Text>User Login</Text>
                     </CardItem>
                     <Form>
-                        <Item stackedLabel>
-                            {this.showEmailError() &&
-                                <Label>Please enter a valid email address</Label>
-                            }
+                        <Item rounded success={!this.showEmailError() && this.state.hasEmailBlurred} error={this.showEmailError() || (this.props.authError && true)}>
+                            <Icon name='mail' />
                             <Input
                                 hasError={this.showEmailError()}
                                 onChangeText={this.proposeNew('email')}
@@ -95,7 +93,11 @@ module.exports = class Login extends StrangeForms(React.Component) {
                                 autoCorrect={false}
                             />
                         </Item>
-                        <Item>
+                        {this.showEmailError() &&
+                            <Label>Please enter a valid email address</Label>
+                        }
+                        <Item rounded success={this.state.password.length > 1} error={this.props.authError && true}>
+                            <Icon name='lock' />
                             <Input
                                 onChangeText={this.proposeNew('password')}
                                 value={this.fieldValue('password')}
@@ -103,20 +105,21 @@ module.exports = class Login extends StrangeForms(React.Component) {
                                 secureTextEntry
                             />
                         </Item>
-                        <Item>
-                            {this.props.authError &&
-                                <Label>{this.props.authError}</Label>
-                            }
-                        </Item>
+                        {this.props.authError &&
+                            <Label>{this.props.authError}</Label>
+                        }
+                        {this.inputsAreValid() &&
+                            <Button
+                                block
+                                rounded
+                                onPress={this.submit}
+                                text='LOGIN'
+                                icon='md-log-in'
+                                iconLeft
+                            />
+                        }
                     </Form>
-                    {this.inputsAreValid() &&
-                        <Button
-                            onPress={this.submit}
-                            text='LOGIN'
-                            icon='md-log-in'
-                            iconLeft
-                        />
-                    }
+
                 </Card>
             </ScrollView>
         );
