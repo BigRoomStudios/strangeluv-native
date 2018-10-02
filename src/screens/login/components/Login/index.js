@@ -5,10 +5,9 @@ const StrangeForms = require('strange-forms');
 const IsEmail = require('utils/is-email');
 
 const { Text, CardItem, Label, Icon } = require('native-base');
-const { ScrollView, Button, Input } = require('styles');
-const { Card, Form, Item } = require('./styles');
+const { ScrollView, Button, Input, Card, Form, Item } = require('styles');
 
-module.exports = class Login extends StrangeForms(React.Component) {
+module.exports = class Login extends StrangeForms(React.PureComponent) {
 
     static propTypes = {
         login: T.func.isRequired,
@@ -84,13 +83,13 @@ module.exports = class Login extends StrangeForms(React.Component) {
                         <Item rounded success={!this.showEmailError() && this.state.hasEmailBlurred} error={this.showEmailError() || (this.props.authError && true)}>
                             <Icon name='mail' />
                             <Input
-                                hasError={this.showEmailError()}
                                 onChangeText={this.proposeNew('email')}
                                 onBlur={this.emailFieldBlurred}
                                 value={this.fieldValue('email')}
                                 placeholder='Email Address'
                                 keyboardType='email-address'
                                 autoCorrect={false}
+                                autoCapitalize={false}
                             />
                         </Item>
                         {this.showEmailError() &&
@@ -105,21 +104,20 @@ module.exports = class Login extends StrangeForms(React.Component) {
                                 secureTextEntry
                             />
                         </Item>
-                        {this.props.authError &&
-                            <Label>{this.props.authError}</Label>
-                        }
-                        {this.inputsAreValid() &&
-                            <Button
-                                block
-                                rounded
-                                onPress={this.submit}
-                                text='LOGIN'
-                                icon='md-log-in'
-                                iconLeft
-                            />
-                        }
                     </Form>
-
+                    {this.props.authError &&
+                        <Label>{this.props.authError}</Label>
+                    }
+                    {this.inputsAreValid() &&
+                        <Button
+                            block
+                            rounded
+                            onPress={this.submit}
+                            text='LOGIN'
+                            icon='md-log-in'
+                            iconLeft
+                        />
+                    }
                 </Card>
             </ScrollView>
         );

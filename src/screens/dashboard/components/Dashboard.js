@@ -1,10 +1,7 @@
 const React = require('react');
 const T = require('prop-types');
-
-// Styles
-const GStyles = require('styles'); // global styles
-
-const { ScrollView, Title, Text } = GStyles;
+const { Text } = require('native-base');
+const { ScrollView } = require('styles');
 
 module.exports = class HomeView extends React.PureComponent {
 
@@ -25,7 +22,7 @@ module.exports = class HomeView extends React.PureComponent {
                 <Text onPress={logout}>
                     Logout
                 </Text>
-                <Title>Very cool dashboard!</Title>
+                <Text>Very cool dashboard!</Text>
             </ScrollView>
         );
     }

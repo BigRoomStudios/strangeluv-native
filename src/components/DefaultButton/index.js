@@ -1,7 +1,6 @@
 const React = require('react');
 const T = require('prop-types');
-const { Icon, Text } = require('native-base');
-const { Button } = require('./styles');
+const { Icon, Text, Button } = require('native-base');
 
 module.exports = class DefaultButton extends React.PureComponent {
 

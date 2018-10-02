@@ -2,6 +2,7 @@
     "presets": ["module:metro-react-native-babel-preset"],
     "sourceMaps": true,
     "plugins": [
+        ["babel-plugin-styled-components"],
         [
             "module-resolver",
             {

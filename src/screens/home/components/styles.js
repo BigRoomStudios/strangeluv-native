@@ -11,7 +11,7 @@ module.exports = {
         margin: 0 auto;
     `,
     Container: styled(Container)`
-      background: transparent;
+        background-color: transparent;
     `,
     Card: styled(Card)`
         margin: 10px 0 15px 0;

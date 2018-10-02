@@ -3,10 +3,10 @@ const T = require('prop-types');
 const StrangeForms = require('strange-forms');
 
 const IsEmail = require('utils/is-email');
-const { Container, Text } = require('native-base');
-const { Button, Input } = require('styles');
+const { CardItem, Text, Icon, Label } = require('native-base');
+const { ScrollView, Button, Input, Item, Form, Card } = require('styles');
 
-module.exports = class Signup extends StrangeForms(React.Component) {
+module.exports = class Signup extends StrangeForms(React.PureComponent) {
 
     static propTypes = {
         signup: T.func.isRequired,
@@ -49,7 +49,7 @@ module.exports = class Signup extends StrangeForms(React.Component) {
         return this.state.password !== ''
         && this.state.firstName !== ''
         && this.state.lastName !== ''
-        && IsEmail(this.state.email);
+        && !this.showEmailError();
     }
 
     _getFormValue(value) {
@@ -78,57 +78,70 @@ module.exports = class Signup extends StrangeForms(React.Component) {
 
         return (
 
-            <Container>
-                <Text>User Signup</Text>
-                <Text>Signup with Strangeluv Native</Text>
-                <Input
-                    onChangeText={this.proposeNew('firstName')}
-                    value={this.fieldValue('firstName')}
-                    placeholder='First Name'
-                    iconName='user'
-                    autoCorrect={false}
-                    iconSize={18}
-                />
-                <Input
-                    onChangeText={this.proposeNew('lastName')}
-                    value={this.fieldValue('lastName')}
-                    placeholder='Last Name'
-                    iconName='user'
-                    autoCorrect={false}
-                    iconSize={18}
-                />
-                <Input
-                    hasError={this.showEmailError()}
-                    onChangeText={this.proposeNew('email')}
-                    onBlur={this.emailFieldBlurred}
-                    value={this.fieldValue('email')}
-                    placeholder='Email Address'
-                    iconName='envelope'
-                    keyboardType='email-address'
-                    autoCorrect={false}
-                    iconSize={18}
-                />
-                {this.showEmailError() &&
-                    <Text>Please enter a valid email address</Text>
-                }
-                <Input
-                    onChangeText={this.proposeNew('password')}
-                    value={this.fieldValue('password')}
-                    placeholder='Password'
-                    iconName='unlock-alt'
-                    secureTextEntry
-                />
-                {this.props.authError &&
-                    <Text>{this.props.authError}</Text>
-                }
-                {this.inputsAreValid() &&
-                    <Button
-                        onPress={this.submit}
-                        text='SIGNUP'
-                        icon='user'
-                    />
-                }
-            </Container>
+            <ScrollView>
+                <Card>
+                    <CardItem header bordered>
+                        <Text>User Signup</Text>
+                    </CardItem>
+                    <Form>
+                        <Item rounded success={this.state.lastName.length > 1}>
+                            <Icon name='person' />
+                            <Input
+                                onChangeText={this.proposeNew('firstName')}
+                                value={this.fieldValue('firstName')}
+                                placeholder='First Name'
+                                autoCorrect={false}
+                            />
+                        </Item>
+                        <Item rounded success={this.state.lastName.length > 1}>
+                            <Icon name='person' />
+                            <Input
+                                onChangeText={this.proposeNew('lastName')}
+                                value={this.fieldValue('lastName')}
+                                placeholder='Last Name'
+                                autoCorrect={false}
+                            />
+                        </Item>
+                        <Item rounded success={!this.showEmailError() && this.state.hasEmailBlurred} error={this.showEmailError() || (this.props.authError && true)}>
+                            <Icon name='mail' />
+                            <Input
+                                onChangeText={this.proposeNew('email')}
+                                onBlur={this.emailFieldBlurred}
+                                value={this.fieldValue('email')}
+                                placeholder='Email Address'
+                                keyboardType='email-address'
+                                autoCorrect={false}
+                                autoCapitalize={false}
+                            />
+                        </Item>
+                        {this.showEmailError() &&
+                            <Label>Please enter a valid email address</Label>
+                        }
+                        <Item rounded success={this.state.password.length > 1} error={this.props.authError && true}>
+                            <Icon name='lock' />
+                            <Input
+                                onChangeText={this.proposeNew('password')}
+                                value={this.fieldValue('password')}
+                                placeholder='Password'
+                                secureTextEntry
+                            />
+                        </Item>
+                        {this.props.authError &&
+                            <Label>{this.props.authError}</Label>
+                        }
+                        {this.inputsAreValid() &&
+                            <Button
+                                block
+                                rounded
+                                onPress={this.submit}
+                                text='SIGNUP'
+                                icon='md-log-in'
+                                iconLeft
+                            />
+                        }
+                    </Form>
+                </Card>
+            </ScrollView>
         );
     }
 };

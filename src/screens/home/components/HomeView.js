@@ -20,7 +20,7 @@ module.exports = class HomeView extends React.PureComponent {
 
             <Container>
                 <ScrollView>
-                    <Card bordered>
+                    <Card>
                         <CardItem header bordered>
                             <Text>Yo! I'm Strangeluv Native</Text>
                         </CardItem>
@@ -31,7 +31,7 @@ module.exports = class HomeView extends React.PureComponent {
                             <Text>with Nativebase</Text>
                         </CardItem>
                     </Card>
-                    <Card bordered>
+                    <Card>
                         <CardItem header bordered>
                             <Text>It's an Auth Recipe</Text>
                         </CardItem>
