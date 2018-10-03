@@ -2,8 +2,8 @@ const React = require('react');
 const T = require('prop-types');
 const StrangeForms = require('strange-forms');
 const IsEmail = require('utils/is-email');
-const { CardItem, Icon } = require('native-base');
-const { ScrollView, Button, Input, Item, Form, Card, Text, ErrorText } = require('styles');
+const { CardItem } = require('native-base');
+const { ScrollView, Button, Input,InputIcon, Item, Form, Card, Text, ErrorText } = require('styles');
 
 module.exports = class Signup extends StrangeForms(React.PureComponent) {
 
@@ -84,7 +84,7 @@ module.exports = class Signup extends StrangeForms(React.PureComponent) {
                     </CardItem>
                     <Form>
                         <Item rounded success={this.state.firstName.length > 1} error={this.props.authError && true}>
-                            <Icon name='person' />
+                            <InputIcon name='person' />
                             <Input
                                 onChangeText={this.proposeNew('firstName')}
                                 value={this.fieldValue('firstName')}
@@ -93,7 +93,7 @@ module.exports = class Signup extends StrangeForms(React.PureComponent) {
                             />
                         </Item>
                         <Item rounded success={this.state.lastName.length > 1} error={this.props.authError && true}>
-                            <Icon name='person' />
+                            <InputIcon name='person' />
                             <Input
                                 onChangeText={this.proposeNew('lastName')}
                                 value={this.fieldValue('lastName')}
@@ -102,7 +102,7 @@ module.exports = class Signup extends StrangeForms(React.PureComponent) {
                             />
                         </Item>
                         <Item rounded success={!this.showEmailError() && this.state.hasEmailBlurred} error={this.showEmailError() || (this.props.authError && true)}>
-                            <Icon name='mail' />
+                            <InputIcon name='mail' />
                             <Input
                                 onChangeText={this.proposeNew('email')}
                                 onBlur={this.emailFieldBlurred}
@@ -117,7 +117,7 @@ module.exports = class Signup extends StrangeForms(React.PureComponent) {
                             <ErrorText>Please enter a valid email address</ErrorText>
                         }
                         <Item rounded success={this.state.password.length > 1} error={this.props.authError && true}>
-                            <Icon name='lock' />
+                            <InputIcon name='lock' />
                             <Input
                                 onChangeText={this.proposeNew('password')}
                                 value={this.fieldValue('password')}

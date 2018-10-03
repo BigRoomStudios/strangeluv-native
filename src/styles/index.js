@@ -1,7 +1,7 @@
 const { default: styled } = require('styled-components/native');
 const DefaultButton = require('components/DefaultButton');
 const FooterNav = require('components/FooterNav');
-const { Card, Form, Item, Input, Text, Container } = require('native-base');
+const { Card, Form, Item, Icon, Input, Text, Container } = require('native-base');
 
 module.exports = {
 
@@ -20,14 +20,13 @@ module.exports = {
         margin: 10px;
     `,
     Input: styled(Input)`
-        padding-left: 6px;
     `,
     FooterNav: styled(FooterNav)`
         background-color: #fff;
         padding-top: 4px;
     `,
     Form: styled(Form)`
-        padding: 16px 16px 12px 16px;
+        padding: 16px 16px 10px 16px;
     `,
     Item: styled(Item)`
         margin-vertical: 8px;
@@ -44,5 +43,8 @@ module.exports = {
     ErrorText: styled(Text)`
         color: red;
         margin: 0 auto;
+    `,
+    InputIcon: styled(Icon)`
+      margin-left: 8px;
     `
 };
