@@ -1,7 +1,7 @@
 const React = require('react');
 const T = require('prop-types');
 const DefaultButton = require('components/DefaultButton');
-const { Footer } = require('./styles');
+const { Footer } = require('native-base');
 
 module.exports = class FooterNav extends React.PureComponent {
 
@@ -17,7 +17,7 @@ module.exports = class FooterNav extends React.PureComponent {
 
         return (
 
-            <Footer>
+            <Footer {...this.props}>
                 <DefaultButton
                     transparent
                     onPress={() => navigation.navigate('Home')}
@@ -47,7 +47,7 @@ module.exports = class FooterNav extends React.PureComponent {
                 <DefaultButton
                     transparent
                     onPress={() => navigation.navigate('Dashboard')}
-                    icon='dashboard'
+                    icon='apps'
                     text='Dashboard'
                     iconLeft
                 />

@@ -1,8 +1,7 @@
 const React = require('react');
 const T = require('prop-types');
 const { CardItem } = require('native-base');
-const { FooterNav, ScrollView } = require('styles');
-const { Card, Container, Duck, Text } = require('./styles');
+const { FooterNav, ScrollView, Card, Container, Image, Text } = require('styles');
 
 module.exports = class HomeView extends React.PureComponent {
 
@@ -25,7 +24,7 @@ module.exports = class HomeView extends React.PureComponent {
                             <Text>Yo! I am Strangeluv Native</Text>
                         </CardItem>
                         <CardItem bordered>
-                            <Duck source={require('../assets/duck.png')} />
+                            <Image source={require('../assets/duck.png')} />
                         </CardItem>
                         <CardItem footer bordered>
                             <Text>with Nativebase</Text>
@@ -36,7 +35,7 @@ module.exports = class HomeView extends React.PureComponent {
                             <Text>It is a Auth Recipe</Text>
                         </CardItem>
                         <CardItem bordered>
-                            <Duck source={require('../assets/icon.png')} />
+                            <Image source={require('../assets/icon.png')} />
                         </CardItem>
                         <CardItem footer bordered>
                             <Text>A pretty sweet start to a user centric app</Text>
