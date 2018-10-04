@@ -63,3 +63,6 @@ coverage
 
 # app configuration
 src/lib/config.js
+
+# NativeBase Theme
+native-base-theme

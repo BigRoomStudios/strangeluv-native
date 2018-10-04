@@ -15,12 +15,18 @@ module.exports = class DefaultHeader extends React.PureComponent {
         const { goBack, title, openMenu } = this.props;
 
         return (
+
             <Header {...this.props}>
                 <Left>
                     {goBack &&
                         <Button transparent onPress={() => goBack()}>
                             <Icon name='arrow-back' />
                         </Button>
+                    }
+                    {!goBack &&
+                    <Button transparent>
+                        <Icon name='home' />
+                    </Button>
                     }
                 </Left>
                 <Body>

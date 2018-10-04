@@ -16,7 +16,7 @@
         "android": "node node_modules/react-native/local-cli/cli.js run-android",
         "link": "node node_modules/react-native/local-cli/cli.js link",
         "glog": "(cd node_modules/react-native/third-party/glog-0.3.4 && ../../scripts/ios-configure-glog.sh)",
-        "postinstall": "npm run link && react-native upgrade",
+        "postinstall": "npm run link && react-native upgrade && node node_modules/native-base/ejectTheme.js",
         "lint": "eslint src",
         "rename": "node node_modules/react-native-rename/lib/index.js"
     },
@@ -24,7 +24,7 @@
         "lint"
     ],
     "dependencies": {
-        "@expo/vector-icons": "^6.3.1",
+        "@expo/vector-icons": "^8.0.0",
         "axios": "^0.18.0",
         "babel-cli": "^6.26.0",
         "babel-core": "^6.26.0",
@@ -35,7 +35,7 @@
         "debug": "^4.0.1",
         "fs-extra": "^7.0.0",
         "keymirror": "^0.1.1",
-        "native-base": "^2.8.0",
+        "native-base": "^2.8.1",
         "object-path-immutable": "^3.0.0",
         "prop-types": "^15.6.0",
         "react": "^16.5.1",
