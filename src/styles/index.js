@@ -45,6 +45,6 @@ module.exports = {
         margin: 0 auto;
     `,
     InputIcon: styled(Icon)`
-      margin-left: 8px;
+        margin-left: 8px;
     `
 };
