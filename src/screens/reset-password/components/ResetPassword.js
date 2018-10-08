@@ -65,7 +65,7 @@ module.exports = class ResetPassword extends StrangeForms(React.PureComponent) {
 
     _showEmailError() {
 
-        return this.state.isBlurred.email && (!!this.state.email && !IsEmail(this.state.email));
+        return this.state.email.length > 0 && this.state.isBlurred.email && (!!this.state.email && !IsEmail(this.state.email));
     }
 
     _showPasswordError() {
@@ -75,7 +75,7 @@ module.exports = class ResetPassword extends StrangeForms(React.PureComponent) {
 
     _passwordsMatch() {
 
-        return this.state.password === this.state.confirmPassword && this.state.password.length > 0;
+        return this.state.password.length > 0 && this.state.password === this.state.confirmPassword;
     }
 
     _disableButton() {
@@ -157,6 +157,9 @@ module.exports = class ResetPassword extends StrangeForms(React.PureComponent) {
                                 secureTextEntry
                             />
                         </Item>
+                        {this.showPasswordError() &&
+                            <ErrorText>Please enter matching passwords</ErrorText>
+                        }
                         <Button
                             onPress={this.submit}
                             text='RESET PASSWORD'
@@ -166,15 +169,10 @@ module.exports = class ResetPassword extends StrangeForms(React.PureComponent) {
                             rounded
                         />
                     </Form>
+                    {this.props.errorMessage &&
+                        <ErrorText>{this.props.errorMessage}</ErrorText>
+                    }
                 </Card>
-
-                {this.showPasswordError() &&
-                    <ErrorText>Please enter matching passwords</ErrorText>
-                }
-                {this.props.errorMessage &&
-                    <ErrorText>{this.props.errorMessage}</ErrorText>
-                }
-
             </ScrollView>
         );
     }
