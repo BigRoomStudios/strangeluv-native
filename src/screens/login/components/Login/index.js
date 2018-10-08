@@ -2,8 +2,8 @@ const React = require('react');
 const T = require('prop-types');
 const StrangeForms = require('strange-forms');
 const IsEmail = require('utils/is-email');
-const { Text, CardItem } = require('native-base');
-const { ScrollView, Button, Input, InputIcon, Card, Form, Item, ErrorText } = require('styles');
+const { CardItem } = require('native-base');
+const { ScrollView, Button, Input, InputIcon, Card, Form, Item, ErrorText, Text } = require('styles');
 
 module.exports = class Login extends StrangeForms(React.PureComponent) {
 
@@ -27,6 +27,7 @@ module.exports = class Login extends StrangeForms(React.PureComponent) {
         this.submit = this._submit.bind(this);
         this.getFormValue = this._getFormValue.bind(this);
         this.emailFieldBlurred = this._emailFieldBlurred.bind(this);
+        this.showEmailError = this._showEmailError.bind(this);
 
         this.strangeForm({
             fields: ['email', 'password'],
@@ -63,12 +64,14 @@ module.exports = class Login extends StrangeForms(React.PureComponent) {
         this.setState({ hasEmailBlurred: true });
     }
 
-    showEmailError() {
+    _showEmailError() {
 
         return this.state.hasEmailBlurred && !IsEmail(this.state.email);
     }
 
     render() {
+
+        const { navigation, isAuthenticated } = this.props;
 
         return (
 
@@ -119,6 +122,16 @@ module.exports = class Login extends StrangeForms(React.PureComponent) {
                         />
                     }
                 </Card>
+                {!isAuthenticated &&
+                    <Text onPress={() => navigation.navigate('ForgotPassword')}>
+                        Forgot Your Password?
+                    </Text>
+                }
+                {!isAuthenticated &&
+                    <Text onPress={() => navigation.navigate('ResetPassword')}>
+                        Reset Your Password
+                    </Text>
+                }
             </ScrollView>
         );
     }

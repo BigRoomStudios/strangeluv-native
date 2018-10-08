@@ -12,6 +12,17 @@ module.exports = (state, action) => {
 
     switch (type) {
 
+        // Set server error message in state to display on our components
+        // TODO one day clean this up with some action creator magic
+        // This could be managed in a separate alert reducer if it makes sense for your project
+        case AuthTypes.REGISTRATION_FAILURE:
+        case AuthTypes.REQUEST_PASSWORD_RESET_FAILURE:
+        case AuthTypes.RESET_PASSWORD_FAILURE:
+
+            return Deeply(state)
+            .set('error.message', payload)
+            .value();
+
         // Example of modifying a strange-auth action-type
         case StrangeAuth.types.LOGIN_FAIL:
 
