@@ -7,8 +7,9 @@ const IsEmail = require('utils/is-email');
 const GStyles = require('styles'); // global styles
 const LStyles = require('./styles'); // local styles
 
-const { Title, ErrorText } = GStyles;
+const { Title, InheritStylesText, ErrorText } = GStyles;
 const { StylishText, StyledScrollView, TitleContainer } = LStyles;
+
 
 const InputField = require('components/InputField');
 const DefaultButton = require('components/DefaultButton');
@@ -78,6 +79,8 @@ module.exports = class Login extends StrangeForms(React.Component) {
 
     render() {
 
+        const { navigation, isAuthenticated } = this.props;
+
         return (
 
             <StyledScrollView>
@@ -116,6 +119,12 @@ module.exports = class Login extends StrangeForms(React.Component) {
                         icon='sign-in'
                     />
                 }
+                {!isAuthenticated && <InheritStylesText onPress={() => navigation.navigate('ForgotPassword')}>
+                    Forgot Your Password?
+                </InheritStylesText>}
+                {!isAuthenticated && <InheritStylesText onPress={() => navigation.navigate('ResetPassword')}>
+                    Reset Your Password
+                </InheritStylesText>}
             </StyledScrollView>
         );
     }
