@@ -7,7 +7,8 @@ module.exports = class DefaultButton extends React.PureComponent {
     static propTypes = {
         icon: T.string,
         text: T.string,
-        onPress: T.func.isRequired
+        onPress: T.func.isRequired,
+        iconColor: T.string
     };
 
     render() {
@@ -16,7 +17,7 @@ module.exports = class DefaultButton extends React.PureComponent {
 
             <Button {...this.props}>
                 {this.props.icon &&
-                    <Icon name={this.props.icon} />
+                    <Icon name={this.props.icon} color={this.props.iconColor} />
                 }
                 {this.props.text &&
                     <Text>

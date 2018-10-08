@@ -20,46 +20,56 @@ module.exports = class FooterNav extends React.PureComponent {
             <Footer {...this.props}>
                 <DefaultButton
                     transparent
+                    light
                     onPress={() => navigation.navigate('Home')}
                     icon='home'
                     text='Home'
                     iconLeft
+                    iconColor='#fff'
                 />
                 {!isAuthenticated &&
-                <DefaultButton
-                    transparent
-                    onPress={() => navigation.navigate('Login')}
-                    icon='log-in'
-                    text='Log-in'
-                    iconLeft
-                />
+                    <DefaultButton
+                        transparent
+                        light
+                        onPress={() => navigation.navigate('Login')}
+                        icon='log-in'
+                        text='Log-in'
+                        iconLeft
+                        iconColor='#fff'
+                    />
                 }
                 {!isAuthenticated &&
-                <DefaultButton
-                    transparent
-                    onPress={() => navigation.navigate('Signup')}
-                    icon='person-add'
-                    text='Sign-up'
-                    iconLeft
-                />
+                    <DefaultButton
+                        transparent
+                        light
+                        onPress={() => navigation.navigate('Signup')}
+                        icon='person-add'
+                        text='Sign-up'
+                        iconLeft
+                        iconColor='#fff'
+                    />
                 }
                 {isAuthenticated &&
-                <DefaultButton
-                    transparent
-                    onPress={() => navigation.navigate('Dashboard')}
-                    icon='apps'
-                    text='Dashboard'
-                    iconLeft
-                />
+                    <DefaultButton
+                        transparent
+                        light
+                        onPress={() => navigation.navigate('Dashboard')}
+                        icon='apps'
+                        text='Dashboard'
+                        iconLeft
+                        iconColor='#fff'
+                    />
                 }
                 {isAuthenticated &&
-                <DefaultButton
-                    transparent
-                    onPress={logout}
-                    icon='log-out'
-                    text='Logout'
-                    iconLeft
-                />
+                    <DefaultButton
+                        transparent
+                        light
+                        onPress={logout}
+                        icon='log-out'
+                        text='Logout'
+                        iconLeft
+                        iconColor='#fff'
+                    />
                 }
             </Footer>
         );

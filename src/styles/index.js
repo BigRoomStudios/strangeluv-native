@@ -22,7 +22,6 @@ module.exports = {
     Input: styled(Input)`
     `,
     FooterNav: styled(FooterNav)`
-        background-color: #fff;
         padding-top: 4px;
     `,
     Form: styled(Form)`
