@@ -65,7 +65,7 @@ module.exports = class ResetPassword extends StrangeForms(React.PureComponent) {
 
     _showEmailError() {
 
-        return this.state.email.length > 0 && this.state.isBlurred.email && (!!this.state.email && !IsEmail(this.state.email));
+        return (this.state.email.length === 0 && this.state.isBlurred.email) || (this.state.isBlurred.email && (!!this.state.email && !IsEmail(this.state.email)));
     }
 
     _showPasswordError() {
