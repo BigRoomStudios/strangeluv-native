@@ -1,12 +1,7 @@
 const React = require('react');
 const T = require('prop-types');
-
-// Styles
-const GStyles = require('styles'); // global styles
-const LStyles = require('./styles'); // local styles
-
-const { ScrollView, Title } = GStyles;
-const { Duck, InheritStylesText } = LStyles;
+const { CardItem } = require('native-base');
+const { FooterNav, ScrollView, Card, Container, Image, Text } = require('styles');
 
 module.exports = class HomeView extends React.PureComponent {
 
@@ -21,25 +16,38 @@ module.exports = class HomeView extends React.PureComponent {
         const { navigation, isAuthenticated, logout } = this.props;
 
         return (
-            <ScrollView>
-                <InheritStylesText color='#b71c1c' onPress={() => navigation.navigate('Home')}>
-                    Home
-                </InheritStylesText>
-                {!isAuthenticated &&
-                    <InheritStylesText onPress={() => navigation.navigate('Login')}>Login</InheritStylesText>
-                }
-                {!isAuthenticated &&
-                    <InheritStylesText onPress={() => navigation.navigate('Signup')}>Signup</InheritStylesText>
-                }
-                {isAuthenticated && <InheritStylesText onPress={() => navigation.navigate('Dashboard')}>
-                    Dashboard
-                </InheritStylesText>}
-                {isAuthenticated && <InheritStylesText onPress={logout}>
-                    Logout
-                </InheritStylesText>}
-                <Title>Welcome!</Title>
-                <Duck source={require('../assets/duck.png')} />
-            </ScrollView>
+
+            <Container>
+                <ScrollView>
+                    <Card>
+                        <CardItem header bordered>
+                            <Text>Yo! I am Strangeluv Native</Text>
+                        </CardItem>
+                        <CardItem bordered>
+                            <Image source={require('../assets/duck.png')} />
+                        </CardItem>
+                        <CardItem footer bordered>
+                            <Text>with Nativebase</Text>
+                        </CardItem>
+                    </Card>
+                    <Card>
+                        <CardItem header bordered>
+                            <Text>It is a Auth Recipe</Text>
+                        </CardItem>
+                        <CardItem bordered>
+                            <Image source={require('../assets/icon.png')} />
+                        </CardItem>
+                        <CardItem footer bordered>
+                            <Text>A pretty sweet start to a user centric app</Text>
+                        </CardItem>
+                    </Card>
+                </ScrollView>
+                <FooterNav
+                    isAuthenticated={isAuthenticated}
+                    logout={logout}
+                    navigation={navigation}
+                />
+            </Container>
         );
     }
 };

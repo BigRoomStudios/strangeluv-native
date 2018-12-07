@@ -1,29 +1,29 @@
 const React = require('react');
 const T = require('prop-types');
-const Theme = require('styles/theme');
-const Icon = require('react-native-vector-icons/FontAwesome').default;
-const { Button, ButtonText } = require('./styles');
+const { Icon, Text, Button } = require('native-base');
 
 module.exports = class DefaultButton extends React.PureComponent {
 
     static propTypes = {
         icon: T.string,
-        text: T.string.isRequired,
+        text: T.string,
         onPress: T.func.isRequired,
-        disabled: T.boolean
+        iconColor: T.string
     };
 
     render() {
 
         return (
 
-            <Button onPress={this.props.onPress} disabled={this.props.disabled}>
+            <Button {...this.props}>
                 {this.props.icon &&
-                    <Icon name={this.props.icon} size={24} color={Theme.secondaryColor} />
+                    <Icon name={this.props.icon} color={this.props.iconColor} />
                 }
-                <ButtonText>
-                    {this.props.text}
-                </ButtonText>
+                {this.props.text &&
+                    <Text>
+                        {this.props.text}
+                    </Text>
+                }
             </Button>
         );
     }

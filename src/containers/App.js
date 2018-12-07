@@ -1,6 +1,9 @@
 const React = require('react');
 const T = require('prop-types');
 const { Provider } = require('react-redux');
+const { StyleProvider } = require('native-base');
+const GetTheme = require('base-theme/components').default;
+const Theme = require('base-theme/variables/material').default;
 
 module.exports = class App extends React.PureComponent {
 
@@ -14,8 +17,11 @@ module.exports = class App extends React.PureComponent {
         const { store, children } = this.props;
 
         return (
+
             <Provider store={store}>
-                {children}
+                <StyleProvider style={GetTheme(Theme)}>
+                    {children}
+                </StyleProvider>
             </Provider>
         );
     }

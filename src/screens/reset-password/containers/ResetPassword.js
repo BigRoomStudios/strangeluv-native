@@ -9,7 +9,8 @@ internals.connect = Connect(
         errorMessage: state.auth.error.message
     }),
     {
-        resetPassword: AuthAct.resetPassword
+        resetPassword: AuthAct.resetPassword,
+        clearErrors: AuthAct.clearErrors
     }
 );
 

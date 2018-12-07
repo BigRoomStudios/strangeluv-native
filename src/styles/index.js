@@ -1,58 +1,49 @@
 const { default: styled } = require('styled-components/native');
-const Theme = require('./theme');
-
-const StyledText = styled.Text`
-    color: ${Theme.primaryTextColor};
-`;
-
-const Text = StyledText;
-
-const ScrollView = styled.ScrollView.attrs({
-    contentContainerStyle: {
-        paddingHorizontal: 20,
-        paddingBottom: 20,
-        flex: 1,
-        flexDirection: 'column',
-        justifyContent: 'center',
-        alignItems: 'center'
-    }
-})`
-    background-color: ${Theme.primaryBgColor};
-    padding: 16px;
-`;
+const DefaultButton = require('components/DefaultButton');
+const FooterNav = require('components/FooterNav');
+const { Card, Form, Item, Icon, Input, Text, Container } = require('native-base');
 
 module.exports = {
 
-    ScrollView,
-    Text,
-    Title: styled(StyledText)`
-        font-size: 19px;
-        font-weight: bold;
-        text-align: center;
+    ScrollView: styled.ScrollView.attrs({
+        contentContainerStyle: {
+            padding: 16
+        }
+    })
+    ``,
+    Image: styled.Image`
+        width: 200px;
+        height: 200px;
+        margin: 0 auto;
     `,
-    Duck: styled.Image`
-        height: 320px;
-        width: 320px;
+    Button: styled(DefaultButton)`
+        margin: 10px;
     `,
-    Button: styled.Button`
-        border: 1px solid blue;
-        padding: 100px;
+    Input: styled(Input)`
     `,
-    StylishText: styled(Text)`
-        color: ${Theme.primaryColor};
-        padding-top: 8px;
+    FooterNav: styled(FooterNav)`
+        padding-top: 4px;
     `,
-    StyledScrollView: styled(ScrollView)`
-      background-color: ${Theme.primaryBgColor};
+    Form: styled(Form)`
+        padding: 16px 16px 10px 16px;
     `,
-    TitleContainer: styled.View`
-      padding: 16px;
+    Item: styled(Item)`
+        margin-vertical: 8px;
     `,
-    InheritStylesText: styled(Text)`
-        color: ${(props) => props.color || Theme.secondaryColor}
+    Text: styled(Text)`
+        margin: 0 auto;
     `,
-    ErrorText: styled.Text`
+    Container: styled(Container)`
+        background-color: transparent;
+    `,
+    Card: styled(Card)`
+        margin: 10px 0 15px 0;
+    `,
+    ErrorText: styled(Text)`
         color: red;
-        padding-bottom: 12px;
+        margin: 0 auto;
+    `,
+    InputIcon: styled(Icon)`
+        margin-left: 8px;
     `
 };

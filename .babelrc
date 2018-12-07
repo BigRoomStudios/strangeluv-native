@@ -2,6 +2,7 @@
     "presets": ["module:metro-react-native-babel-preset"],
     "sourceMaps": true,
     "plugins": [
+        ["babel-plugin-styled-components"],
         [
             "module-resolver",
             {
@@ -21,7 +22,8 @@
                     "utils": "./src/utils",
                     "styles": "./src/styles",
                     "initializers": "./src/initializers",
-                    "navigators": "./src/navigators"
+                    "navigators": "./src/navigators",
+                    "base-theme": "./native-base-theme"
                 }
             }
         ]

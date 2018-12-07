@@ -1,10 +1,7 @@
 const React = require('react');
 const T = require('prop-types');
-
-// Styles
-const GStyles = require('styles'); // global styles
-
-const { ScrollView, Title, Text } = GStyles;
+const { CardItem } = require('native-base');
+const { ScrollView, FooterNav, Container, Card, Text, Image } = require('styles');
 
 module.exports = class HomeView extends React.PureComponent {
 
@@ -15,18 +12,27 @@ module.exports = class HomeView extends React.PureComponent {
 
     render() {
 
-        const { navigation, logout } = this.props;
-
         return (
-            <ScrollView>
-                <Text color='#b71c1c' onPress={() => navigation.navigate('Home')}>
-                    Home
-                </Text>
-                <Text onPress={logout}>
-                    Logout
-                </Text>
-                <Title>Very cool dashboard!</Title>
-            </ScrollView>
+
+            <Container>
+                <ScrollView>
+                    <Card>
+                        <CardItem header bordered>
+                            <Text>It is a very cool dashboard!</Text>
+                        </CardItem>
+                        <CardItem cardBody>
+                            <Image source={require('../assets/icon.png')} />
+                        </CardItem>
+                        <CardItem>
+                            <Text>Things can be here and stuff.</Text>
+                        </CardItem>
+                        <CardItem footer bordered>
+                            <Text>Make me something cool!</Text>
+                        </CardItem>
+                    </Card>
+                </ScrollView>
+                <FooterNav {...this.props} />
+            </Container>
         );
     }
 };

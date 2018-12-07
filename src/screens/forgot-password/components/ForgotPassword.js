@@ -2,19 +2,15 @@ const React = require('react');
 const T = require('prop-types');
 const StrangeForms = require('strange-forms');
 const IsEmail = require('utils/is-email');
+const { CardItem } = require('native-base');
+const { Button, Card, Input, ScrollView, ErrorText, Text, Item, Form, InputIcon } = require('styles');
 
-const GStyles = require('styles'); // global styles
-
-const { Title, StylishText, ErrorText, StyledScrollView, TitleContainer } = GStyles;
-
-const InputField = require('components/InputField');
-const DefaultButton = require('components/DefaultButton');
-
-module.exports = class ForgotPassword extends StrangeForms(React.Component) {
+module.exports = class ForgotPassword extends StrangeForms(React.PureComponent) {
 
     static propTypes = {
         requestReset: T.func.isRequired,
-        errorMessage: T.string
+        errorMessage: T.string,
+        clearErrors: T.func.isRequired
     };
 
     constructor(props) {
@@ -39,7 +35,11 @@ module.exports = class ForgotPassword extends StrangeForms(React.Component) {
             act: (field, value) => this.setState({ [field]: value }),
             getFormValue: this.getFormValue
         });
+    }
 
+    componentWillMount() {
+
+        this.props.clearErrors();
     }
 
     _getFormValue(value) {
@@ -59,7 +59,7 @@ module.exports = class ForgotPassword extends StrangeForms(React.Component) {
 
     _showEmailError() {
 
-        return this.state.hasEmailBlurred && (!!this.state.email && !IsEmail(this.state.email));
+        return (this.state.email.length === 0 && this.state.hasEmailBlurred) || (this.state.hasEmailBlurred && (!!this.state.email && !IsEmail(this.state.email)));
     }
 
     _disableButton() {
@@ -82,36 +82,47 @@ module.exports = class ForgotPassword extends StrangeForms(React.Component) {
         // TODO when typing triggers an invalid email, you lose your cursor, are booted from
         // the input. Why? How can we prevent?
         return (
-            <StyledScrollView>
-                <TitleContainer>
-                    <Title>Forgot Your Password?</Title>
-                    <StylishText>To reset your password, enter your email below and we will email a code to reset your password.</StylishText>
-                </TitleContainer>
-                <InputField
-                    hasError={this.showEmailError()}
-                    onChangeText={this.proposeNew('email')}
-                    onBlur={this.emailFieldBlurred}
-                    onFocus={this.emailFieldFocused}
-                    value={this.fieldValue('email')}
-                    placeholder='Email Address'
-                    iconName='envelope'
-                    keyboardType='email-address'
-                    autoCorrect={false}
-                    iconSize={18}
-                />
-                {this.showEmailError() &&
-                    <ErrorText>Please enter a valid email address</ErrorText>
-                }
-                {this.props.errorMessage &&
-                    <ErrorText>{this.props.errorMessage}</ErrorText>
-                }
-                <DefaultButton
-                    onPress={this.submit}
-                    text='GET A PASSWORD RESET CODE'
-                    icon='inbox'
-                    disabled={this.disableButton()}
-                />
-            </StyledScrollView>
+            <ScrollView>
+                <Card>
+                    <CardItem header bordered>
+                        <Text>Forgot Your Password?</Text>
+                    </CardItem>
+                    <CardItem>
+                        <Text>To reset your password, enter your email below and we will email a code to reset your password.</Text>
+                    </CardItem>
+                    <Form>
+                        <Item rounded success={!this.showEmailError() && this.state.hasEmailBlurred} error={this.showEmailError()}>
+                            <InputIcon name='mail' />
+                            <Input
+                                hasError={this.showEmailError()}
+                                onChangeText={this.proposeNew('email')}
+                                onBlur={this.emailFieldBlurred}
+                                onFocus={this.emailFieldFocused}
+                                value={this.fieldValue('email')}
+                                placeholder='Email Address'
+                                icon='envelope'
+                                keyboardType='email-address'
+                                autoCapitalize='none'
+                                autoCorrect={false}
+                            />
+                        </Item>
+                        {this.showEmailError() &&
+                            <ErrorText>Please enter a valid email address</ErrorText>
+                        }
+                        {this.props.errorMessage &&
+                            <ErrorText>{this.props.errorMessage}</ErrorText>
+                        }
+                        <Button
+                            onPress={this.submit}
+                            text='REQUEST RESET CODE'
+                            icon='sync'
+                            disabled={this.disableButton()}
+                            block
+                            rounded
+                        />
+                    </Form>
+                </Card>
+            </ScrollView>
         );
     }
 };

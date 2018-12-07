@@ -10,7 +10,8 @@ internals.connect = Connect(
     }),
     {
         // TODO Need to define
-        requestReset: AuthAct.requestPasswordReset
+        requestReset: AuthAct.requestPasswordReset,
+        clearErrors: AuthAct.clearErrors
     }
 );
 

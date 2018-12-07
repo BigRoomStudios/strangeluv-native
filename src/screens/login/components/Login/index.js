@@ -1,20 +1,11 @@
 const React = require('react');
 const T = require('prop-types');
 const StrangeForms = require('strange-forms');
-
 const IsEmail = require('utils/is-email');
+const { CardItem } = require('native-base');
+const { ScrollView, Button, Input, InputIcon, Card, Form, Item, ErrorText, Text } = require('styles');
 
-const GStyles = require('styles'); // global styles
-const LStyles = require('./styles'); // local styles
-
-const { Title, InheritStylesText, ErrorText } = GStyles;
-const { StylishText, StyledScrollView, TitleContainer } = LStyles;
-
-
-const InputField = require('components/InputField');
-const DefaultButton = require('components/DefaultButton');
-
-module.exports = class Login extends StrangeForms(React.Component) {
+module.exports = class Login extends StrangeForms(React.PureComponent) {
 
     static propTypes = {
         login: T.func.isRequired,
@@ -36,6 +27,7 @@ module.exports = class Login extends StrangeForms(React.Component) {
         this.submit = this._submit.bind(this);
         this.getFormValue = this._getFormValue.bind(this);
         this.emailFieldBlurred = this._emailFieldBlurred.bind(this);
+        this.showEmailError = this._showEmailError.bind(this);
 
         this.strangeForm({
             fields: ['email', 'password'],
@@ -72,7 +64,7 @@ module.exports = class Login extends StrangeForms(React.Component) {
         this.setState({ hasEmailBlurred: true });
     }
 
-    showEmailError() {
+    _showEmailError() {
 
         return this.state.hasEmailBlurred && !IsEmail(this.state.email);
     }
@@ -83,49 +75,64 @@ module.exports = class Login extends StrangeForms(React.Component) {
 
         return (
 
-            <StyledScrollView>
-                <TitleContainer>
-                    <Title>User Login</Title>
-                    <StylishText>Welcome back to Strangeluv Native!</StylishText>
-                </TitleContainer>
-                <InputField
-                    hasError={this.showEmailError()}
-                    onChangeText={this.proposeNew('email')}
-                    onBlur={this.emailFieldBlurred}
-                    value={this.fieldValue('email')}
-                    placeholder='Email Address'
-                    iconName='envelope'
-                    keyboardType='email-address'
-                    autoCorrect={false}
-                    iconSize={18}
-                />
-                {this.showEmailError() &&
-                    <ErrorText>Please enter a valid email address</ErrorText>
+            <ScrollView>
+                <Card>
+                    <CardItem header bordered>
+                        <Text>User Login</Text>
+                    </CardItem>
+                    <Form>
+                        <Item rounded success={!this.showEmailError() && this.state.hasEmailBlurred} error={this.showEmailError() || (this.props.authError && true)}>
+                            <InputIcon name='mail' />
+                            <Input
+                                onChangeText={this.proposeNew('email')}
+                                onBlur={this.emailFieldBlurred}
+                                value={this.fieldValue('email')}
+                                placeholder='Email Address'
+                                keyboardType='email-address'
+                                autoCorrect={false}
+                                autoCapitalize='none'
+                            />
+                        </Item>
+                        {this.showEmailError() &&
+                            <ErrorText>Please enter a valid email address</ErrorText>
+                        }
+                        <Item rounded success={this.state.password.length > 1} error={this.props.authError && true}>
+                            <InputIcon name='lock' />
+                            <Input
+                                onChangeText={this.proposeNew('password')}
+                                value={this.fieldValue('password')}
+                                placeholder='Password'
+                                secureTextEntry
+                            />
+                        </Item>
+                    </Form>
+                    {this.props.authError &&
+                    <CardItem>
+                        <ErrorText>{this.props.authError}</ErrorText>
+                    </CardItem>
+                    }
+                    {this.inputsAreValid() &&
+                        <Button
+                            block
+                            rounded
+                            onPress={this.submit}
+                            text='LOGIN'
+                            icon='md-log-in'
+                            iconLeft
+                        />
+                    }
+                </Card>
+                {!isAuthenticated &&
+                    <Text onPress={() => navigation.navigate('ForgotPassword')}>
+                        Forgot Your Password?
+                    </Text>
                 }
-                <InputField
-                    onChangeText={this.proposeNew('password')}
-                    value={this.fieldValue('password')}
-                    placeholder='Password'
-                    iconName='unlock-alt'
-                    secureTextEntry
-                />
-                {this.props.authError &&
-                    <ErrorText>{this.props.authError}</ErrorText>
+                {!isAuthenticated &&
+                    <Text onPress={() => navigation.navigate('ResetPassword')}>
+                        Reset Your Password
+                    </Text>
                 }
-                {this.inputsAreValid() &&
-                    <DefaultButton
-                        onPress={this.submit}
-                        text='LOGIN'
-                        icon='sign-in'
-                    />
-                }
-                {!isAuthenticated && <InheritStylesText onPress={() => navigation.navigate('ForgotPassword')}>
-                    Forgot Your Password?
-                </InheritStylesText>}
-                {!isAuthenticated && <InheritStylesText onPress={() => navigation.navigate('ResetPassword')}>
-                    Reset Your Password
-                </InheritStylesText>}
-            </StyledScrollView>
+            </ScrollView>
         );
     }
 };
