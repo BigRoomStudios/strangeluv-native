@@ -1,7 +1,7 @@
 const StrangeAuth = require('strange-auth');
 const WebClient = require('utils/web-client');
 const AuthAct = require('action-types/auth');
-const NavigationService = require('navigators/navigation-service');
+const NavigationService = require('navigators/NavigationService');
 
 const internals = {};
 

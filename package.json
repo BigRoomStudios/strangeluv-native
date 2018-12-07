@@ -65,6 +65,8 @@
         "pre-commit": "^1.2.2",
         "react-native-rename": "^2.2.2",
         "reactotron-react-native": "^2.1.0",
-        "reactotron-redux": "^2.1.0"
+        "reactotron-redux": "^2.1.0",
+        "strange-auth": "^1.0.0",
+        "strange-forms": "^1.1.0"
     }
 }
