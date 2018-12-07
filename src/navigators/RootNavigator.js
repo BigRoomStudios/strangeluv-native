@@ -1,4 +1,7 @@
-const { createStackNavigator: CreateStackNavigator } = require('react-navigation');
+const {
+    createStackNavigator: CreateStackNavigator,
+    createAppContainer: CreateAppContainer
+} = require('react-navigation');
 
 module.exports = (store) => {
 
@@ -8,12 +11,12 @@ module.exports = (store) => {
         throw new Error('Screens must export props "routeConfig" and "initialRouteName"');
     }
 
-    const AppNavigator = CreateStackNavigator(
-        Screens.routeConfig,
-        {
-            initialRouteName: Screens.initialRouteName
-        }
+    return CreateAppContainer(
+        CreateStackNavigator(
+            Screens.routeConfig,
+            {
+                initialRouteName: Screens.initialRouteName
+            }
+        )
     );
-
-    return AppNavigator;
 };
